@@ -31,38 +31,41 @@ package de.stefan_oltmann.kaesekaestchen.model;
  */
 public enum PlayerType {
 
-	MAN, COMPUTER_EASY, COMPUTER_MEDIUM, COMPUTER_HARD;
+    MENSCH,
+    COMPUTER_EINFACH,
+    COMPUTER_MITTEL,
+    COMPUTER_SCHWER;
 
-	/**
-	 * Wenn im Spinner ein Typ ausgewählt wurde, können wir nur die
-	 * String-Repräsentation davon abfragen. Der Spinner nimmt leider keine
-	 * Enums entgegen. Deshalb müssen wir den richtigen Typ aus dem String
-	 * parsen.
-	 */
-	public static PlayerType parse(String string) {
+    /**
+     * Wenn im Spinner ein Typ ausgewählt wurde, können wir nur die
+     * String-Repräsentation davon abfragen. Der Spinner nimmt leider keine
+     * Enums entgegen. Deshalb müssen wir den richtigen Typ aus dem String
+     * parsen.
+     */
+    public static PlayerType parse(String string) {
 
-		if (string == null)
-			return null;
+        if (string == null)
+            return null;
 
-		if (string.equals("Mensch") || string.equals("Human"))
-			return MAN;
+        if (string.equals("Mensch") || string.equals("Human"))
+            return MENSCH;
 
-		if (string.equals("KI Leicht") || string.equals("KI Easy"))
-			return COMPUTER_EASY;
+        if (string.equals("KI Leicht") || string.equals("KI Easy"))
+            return COMPUTER_EINFACH;
 
-		if (string.equals("KI Mittel") || string.equals("KI Medium"))
-			return COMPUTER_MEDIUM;
+        if (string.equals("KI Mittel") || string.equals("KI Medium"))
+            return COMPUTER_MITTEL;
 
-		if (string.equals("KI Schwer") || string.equals("KI Hard"))
-			return COMPUTER_HARD;
+        if (string.equals("KI Schwer") || string.equals("KI Hard"))
+            return COMPUTER_SCHWER;
 
-		throw new IllegalArgumentException("Unbekannter SpielerTyp: " + string);
-	}
+        throw new IllegalArgumentException("Unbekannter SpielerTyp: " + string);
+    }
 
-	public boolean isComputerGegner() {
-		return this == PlayerType.COMPUTER_EASY
-				|| this == PlayerType.COMPUTER_MEDIUM
-				|| this == PlayerType.COMPUTER_HARD;
-	}
+    public boolean isComputerGegner() {
+        return this == PlayerType.COMPUTER_EINFACH
+                || this == PlayerType.COMPUTER_MITTEL
+                || this == PlayerType.COMPUTER_SCHWER;
+    }
 
 }
