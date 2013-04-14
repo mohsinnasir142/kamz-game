@@ -34,7 +34,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.Spinner;
-import de.stefan_oltmann.kaesekaestchen.model.SpielerTyp;
+import de.stefan_oltmann.kaesekaestchen.model.PlayerType;
 
 /**
  * Diese Activity wird bei Starten der App angezeigt. Hier wird ausgewählt, wer
@@ -94,8 +94,8 @@ public class StartseiteActivity extends Activity implements OnClickListener {
 
     public void onClick(View v) {
 
-        SpielerTyp spielerTyp1 = SpielerTyp.parse((String) ((Spinner) findViewById(R.id.spieler_typ_1_spinner)).getSelectedItem());
-        SpielerTyp spielerTyp2 = SpielerTyp.parse((String) ((Spinner) findViewById(R.id.spieler_typ_2_spinner)).getSelectedItem());
+        PlayerType spielerTyp1 = PlayerType.parse((String) ((Spinner) findViewById(R.id.spieler_typ_1_spinner)).getSelectedItem());
+        PlayerType spielerTyp2 = PlayerType.parse((String) ((Spinner) findViewById(R.id.spieler_typ_2_spinner)).getSelectedItem());
 
         int feldGroesseX = Integer.parseInt((String) ((Spinner) findViewById(R.id.feld_groesse_x)).getSelectedItem());
         int feldGroesseY = Integer.parseInt((String) ((Spinner) findViewById(R.id.feld_groesse_y)).getSelectedItem());

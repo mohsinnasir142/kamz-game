@@ -37,9 +37,9 @@ public class Spieler {
     private String     name;
     private Bitmap     symbol;
     private int        farbe;
-    private SpielerTyp spielerTyp;
+    private PlayerType spielerTyp;
 
-    public Spieler(String name, Bitmap symbol, int farbe, SpielerTyp spielerTyp) {
+    public Spieler(String name, Bitmap symbol, int farbe, PlayerType spielerTyp) {
         this.name = name;
         this.symbol = symbol;
         this.farbe = farbe;
@@ -58,7 +58,7 @@ public class Spieler {
         return farbe;
     }
 
-    public SpielerTyp getSpielerTyp() {
+    public PlayerType getSpielerTyp() {
         return spielerTyp;
     }
 
