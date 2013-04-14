@@ -39,7 +39,7 @@ import android.widget.TextView;
 import de.stefan_oltmann.kaesekaestchen.model.Kaestchen;
 import de.stefan_oltmann.kaesekaestchen.model.Spieler;
 import de.stefan_oltmann.kaesekaestchen.model.SpielerManager;
-import de.stefan_oltmann.kaesekaestchen.model.SpielerTyp;
+import de.stefan_oltmann.kaesekaestchen.model.PlayerType;
 import de.stefan_oltmann.kaesekaestchen.model.Spielfeld;
 import de.stefan_oltmann.kaesekaestchen.model.Strich;
 
@@ -65,8 +65,8 @@ public class SpielActivity extends Activity {
 
         Bundle intentExtras = getIntent().getExtras();
 
-        SpielerTyp spielerTyp1 = (SpielerTyp) intentExtras.get("spielerTyp1");
-        SpielerTyp spielerTyp2 = (SpielerTyp) intentExtras.get("spielerTyp2");
+        PlayerType spielerTyp1 = (PlayerType) intentExtras.get("spielerTyp1");
+        PlayerType spielerTyp2 = (PlayerType) intentExtras.get("spielerTyp2");
 
         int feldGroesseX = intentExtras.getInt("feldGroesseX");
         int feldGroesseY = intentExtras.getInt("feldGroesseY");
@@ -239,7 +239,7 @@ public class SpielActivity extends Activity {
         return sb.toString();
     }
 
-    private Strich computerGegnerZug(SpielerTyp spielerTyp) {
+    private Strich computerGegnerZug(PlayerType spielerTyp) {
 
         Strich strich = waehleLetztenOffenenStrichFuerKaestchen();
 
@@ -254,7 +254,7 @@ public class SpielActivity extends Activity {
          * Gegners ein Kästchen schließen könnte und diesem damit einen Punkt
          * schenkt.
          */
-        if (spielerTyp == SpielerTyp.COMPUTER_MITTEL) {
+        if (spielerTyp == PlayerType.COMPUTER_MEDIUM) {
 
             int loopCounter = 0;
 
