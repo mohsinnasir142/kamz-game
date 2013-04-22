@@ -254,7 +254,7 @@ public class SpielActivity extends Activity {
          * Gegners ein Kästchen schließen könnte und diesem damit einen Punkt
          * schenkt.
          */
-        if (spielerTyp == PlayerType.COMPUTER_MEDIUM) {
+        if (spielerTyp == PlayerType.COMPUTER_MITTEL) {
 
             int loopCounter = 0;
 
