@@ -28,6 +28,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -36,25 +37,25 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.widget.ImageView;
 import android.widget.TextView;
-import de.stefan_oltmann.kaesekaestchen.model.Kaestchen;
-import de.stefan_oltmann.kaesekaestchen.model.Spieler;
-import de.stefan_oltmann.kaesekaestchen.model.SpielerManager;
+import de.stefan_oltmann.kaesekaestchen.model.ShowBoxes;
+import de.stefan_oltmann.kaesekaestchen.model.Player;
+import de.stefan_oltmann.kaesekaestchen.model.PlayerManager;
 import de.stefan_oltmann.kaesekaestchen.model.PlayerType;
-import de.stefan_oltmann.kaesekaestchen.model.Spielfeld;
+import de.stefan_oltmann.kaesekaestchen.model.PlayerField;
 import de.stefan_oltmann.kaesekaestchen.model.Strich;
 
 /**
- * Die Haupt-Acitivty, die das Spielfeld verwaltet und den Gameloop steuert.
+ * The main activity that manages the game and controls the Gameloop.
  */
-public class SpielActivity extends Activity {
+public class GameActivity extends Activity {
 
-    private SpielfeldView    spielfeldView;
-    private Spielfeld        spielfeld;
-    private SpielerManager   spielerManager;
+    private SpielfeldView    playingFieldView;
+    private PlayerField        playingField;
+    private PlayerManager   playingManager;
 
     private final Handler    mHandler = new Handler();
 
-    /** Diese Variable steuert den Game Loop Thread. */
+    /**  This variable controls the game loop thread. */
     private volatile boolean running  = true;
 
     @Override
@@ -71,18 +72,18 @@ public class SpielActivity extends Activity {
         int feldGroesseX = intentExtras.getInt("feldGroesseX");
         int feldGroesseY = intentExtras.getInt("feldGroesseY");
 
-        spielfeld = Spielfeld.generieren(feldGroesseX, feldGroesseY);
-        spielerManager = new SpielerManager();
+        playingField = PlayerField.generate(feldGroesseX, feldGroesseY);
+        playingManager = new PlayerManager();
 
-        spielfeldView = (SpielfeldView) findViewById(R.id.spielfeldView);
-        spielfeldView.init(spielfeld);
+        playingFieldView = (SpielfeldView) findViewById(R.id.spielfeldView);
+        playingFieldView.init(playingField);
 
-        spielerManager.addSpieler(
-                new Spieler(getResources().getString(R.string.spieler_1_name),
+        playingManager.addPlayers(
+                new Player(getResources().getString(R.string.spieler_1_name),
                         BitmapFactory.decodeResource(getResources(), R.drawable.spieler_symbol_kaese),
                         getResources().getColor(R.color.spieler_1_farbe), spielerTyp1));
-        spielerManager.addSpieler(
-                new Spieler(getResources().getString(R.string.spieler_2_name),
+        playingManager.addPlayers(
+                new Player(getResources().getString(R.string.spieler_2_name),
                         BitmapFactory.decodeResource(getResources(), R.drawable.spieler_symbol_maus),
                         getResources().getColor(R.color.spieler_2_farbe), spielerTyp2));
 
@@ -105,16 +106,15 @@ public class SpielActivity extends Activity {
 
         public void run() {
 
-            /* Auswahl des ersten Spielers */
-            spielerManager.naechstenSpielerAuswaehlen();
+            /* The first player selection */
+            playingManager.selectNextPlayer();
 
             while (!isGameOver()) {
 
-                final Spieler spieler = spielerManager.getAktuellerSpieler();
+                final Player spieler = playingManager.getCurrentPlayer();
 
                 /*
-                 * Anzeige welcher Spieler dran ist und wieviele Punkt dieser
-                 * schon hat.
+                 *  Display which player is it and how many points it has already.
                  */
                 mHandler.post(new Runnable() {
                     public void run() {
@@ -123,56 +123,56 @@ public class SpielActivity extends Activity {
                         imageView.setImageBitmap(spieler.getSymbol());
 
                         TextView textView = (TextView) findViewById(R.id.punkteAnzeige);
-                        textView.setText(String.valueOf(ermittlePunktzahl(spieler)));
+                        textView.setText(String.valueOf(investigatingScore(spieler)));
                     }
                 });
 
-                Strich eingabe = null;
+                Strich line = null;
 
-                if (!spieler.isComputerGegner()) {
+                if (!spieler.isComputerOpponent()) {
 
-                    spielfeldView.resetLetzteEingabe();
+                    playingFieldView.resetLastInput();
 
                     /*
-                     * Der Benutzer muss nun seine Eingabe tätigen. Dieser
-                     * Gameloop- Thread soll nun darauf warten. Dafür wird hier
-                     * die wait()/notify()-Technik von Java verwendet. Solange
-                     * keine neue Eingabe getätigt wurde, schläft dieser Thread
-                     * nun.
+                     * The user now has its input � t� term. Gameloop this
+					 * thread is now waiting. The wait () / notify () from Java
+					 * Technology Edition Note: is used here. As long as no new
+					 * entry was get account � �, sleeps this thread now.
                      */
-                    while ((eingabe = spielfeldView.getLetzteEingabe()) == null) {
+                    while ((line = playingFieldView.getLastInput()) == null) {
                         try {
-                            synchronized (spielfeldView) {
-                                spielfeldView.wait();
+                            synchronized (playingFieldView) {
+                                playingFieldView.wait();
                             }
                         } catch (InterruptedException ignore) {
                             /*
-                             * Dieser Fall kann ignoriert werden. Sollte der
-                             * Thread plötzlich wieder aufwachen, wird er sofern
-                             * noch keine Eingabe getätigt ist durch die
-                             * umgebene while-Schleife direkt wieder schlafen
-                             * gelegt.
+                             *This case can be ignored. If the thread pl wake
+							 * up again tzlich � �, it is provided that no input
+							 * is Geta � account directly put to sleep again
+							 * surrounded by the while loop.
                              */
                         }
                     }
 
-                } else {
+                } 
+                
+                else {
 
-                    try { /* Der Nutzer soll die Eingabe des Computers sehen. */
+                    try { /*The user should see the input of the computer.*/
                         Thread.sleep(500);
                     } catch (InterruptedException ignore) {
                     }
 
-                    eingabe = computerGegnerZug(spieler.getSpielerTyp());
+                    line = computerGegnerZug(spieler.getPlayerType());
                 }
 
-                waehleStrich(eingabe);
+                selectLine(line);
 
                 /*
                  * Wurde die Activity beendet, dann auch diesen Thread stoppen.
-                 * Ohne diese Zeile würde die Activity niemals enden und der
-                 * Thread immer weiter laufen, bis Android diesen killt. Wir
-                 * wollen aber natürlich nicht negativ auffallen.
+				 * Ohne diese Zeile würde die Activity niemals enden und der
+				 * Thread immer weiter laufen, bis Android diesen killt. Wir
+				 * wollen aber natürlich nicht negativ auffallen.
                  */
                 if (!running)
                     return;
@@ -188,7 +188,7 @@ public class SpielActivity extends Activity {
 
                     public void run() {
 
-                        Spieler gewinner = ermittleGewinner();
+                        Player gewinner = investigatingWinner();
 
                         /* FIXME Hartkodierte Pokalbilder */
                         int pokalBildID = 0;
@@ -197,7 +197,7 @@ public class SpielActivity extends Activity {
                         else
                             pokalBildID = R.drawable.pokal_maus;
 
-                        AlertDialog alertDialog = new AlertDialog.Builder(SpielActivity.this)
+                        AlertDialog alertDialog = new AlertDialog.Builder(GameActivity.this)
                                 .setTitle(getResources().getText(R.string.game_score))
                                 .setIcon(getResources().getDrawable(pokalBildID))
                                 .setMessage(getGameOverDialogMessage())
@@ -212,7 +212,7 @@ public class SpielActivity extends Activity {
                                         new DialogInterface.OnClickListener() {
                                             public void onClick(DialogInterface dialog, int id) {
                                                 dialog.dismiss();
-                                                SpielActivity.this.finish();
+                                                GameActivity.this.finish();
                                             }
                                         })
                                 .create();
@@ -227,26 +227,26 @@ public class SpielActivity extends Activity {
 
     private String getGameOverDialogMessage() {
 
-        Spieler gewinner = ermittleGewinner();
+        Player gewinner = investigatingWinner();
 
         StringBuilder sb = new StringBuilder();
 
         sb.append(getResources().getString(R.string.gewinner) + ": " + gewinner.getName() + "\n\n");
 
-        for (Spieler spieler : spielerManager.getSpieler())
-            sb.append(spieler.getName() + ":\t\t" + ermittlePunktzahl(spieler) + "\n");
+        for (Player spieler : playingManager.getSpieler())
+            sb.append(spieler.getName() + ":\t\t" + investigatingScore(spieler) + "\n");
 
         return sb.toString();
     }
 
     private Strich computerGegnerZug(PlayerType spielerTyp) {
 
-        Strich strich = waehleLetztenOffenenStrichFuerKaestchen();
+        Strich strich = lastOpenLineForBox();
 
         if (strich != null)
             return strich;
 
-        Strich zufallsStrich = waehleZufallsStrich();
+        Strich randomLine = SelectRandomLine();
 
         /*
          * Die einfache KI wählt einfach irgendeinen Strich, die mittlere KI
@@ -254,13 +254,13 @@ public class SpielActivity extends Activity {
          * Gegners ein Kästchen schließen könnte und diesem damit einen Punkt
          * schenkt.
          */
-        if (spielerTyp == PlayerType.COMPUTER_MITTEL) {
+        if (spielerTyp == PlayerType.COMPUTER_MEDIUM) {
 
             int loopCounter = 0;
 
-            while (zufallsStrich.isKoennteUmliegendendesKaestchenSchliessen()) {
+            while (randomLine.isSurroundingBoxClose()) {
 
-                zufallsStrich = waehleZufallsStrich();
+                randomLine = SelectRandomLine();
 
                 /*
                  * Dies wird maximal 30 Mal versucht. Konnte dann immer noch
@@ -272,77 +272,76 @@ public class SpielActivity extends Activity {
             }
         }
 
-        return zufallsStrich;
+        return randomLine;
     }
+// Last hand select open line for box
+    private Strich lastOpenLineForBox() {
 
-    private Strich waehleLetztenOffenenStrichFuerKaestchen() {
-
-        for (Kaestchen kaestchen : spielfeld.getOffeneKaestchenListe())
-            if (kaestchen.getStricheOhneBesitzer().size() == 1)
-                return kaestchen.getStricheOhneBesitzer().get(0);
+        for (ShowBoxes kaestchen : playingField.getOpenBoxList())
+            if (kaestchen.getUnselectedLinesList().size() == 1)
+                return kaestchen.getUnselectedLinesList().get(0);
 
         return null;
     }
 
-    private Strich waehleZufallsStrich() {
+    private Strich SelectRandomLine() {
 
-        List<Strich> stricheOhneBesitzer = new ArrayList<Strich>(spielfeld.getStricheOhneBesitzer());
-        Strich zufallsStrich = stricheOhneBesitzer.get(new Random().nextInt(stricheOhneBesitzer.size()));
+        List<Strich> StrokesWithoutOwners = new ArrayList<Strich>(playingField.getStricheOhneBesitzer());
+        Strich randomLine = StrokesWithoutOwners.get(new Random().nextInt(StrokesWithoutOwners.size()));
 
-        return zufallsStrich;
+        return randomLine;
     }
 
-    private void waehleStrich(Strich strich) {
+    private void selectLine(Strich strich) {
 
-        if (strich.getBesitzer() != null)
+        if (strich.getOwner() != null)
             return;
 
-        Spieler aktuellerSpieler = spielerManager.getAktuellerSpieler();
+        Player currentPlayer = playingManager.getCurrentPlayer();
 
-        boolean kaestchenKonnteGeschlossenWerden = spielfeld.waehleStrich(strich, aktuellerSpieler);
+        boolean isBoxBecomeComplete = playingField.optForLine(strich, currentPlayer);
 
         /*
-         * Wenn ein Kästchen geschlossen werden konnte, ist derjenige Spieler
-         * noch einmal dran. Konnte er keines schließen, ist der andere Spieler
-         * wieder dran:
+         ** If a cheese could be closed stchen, the player is to it again. Could
+		 * he Close none of the other player's turn again:
          */
-        if (!kaestchenKonnteGeschlossenWerden)
-            spielerManager.naechstenSpielerAuswaehlen();
+        if (!isBoxBecomeComplete)
+            playingManager.selectNextPlayer();
 
-        spielfeldView.anzeigeAktualisieren();
+        playingFieldView.updateDisplay();
     }
 
     public boolean isGameOver() {
-        return spielfeld.isAlleKaestchenHabenBesitzer();
+        return playingField.isAllOwnerHaveBoxes();
     }
 
-    public Spieler ermittleGewinner() {
+    public Player investigatingWinner() {
 
-        Spieler gewinner = null;
-        int maxPunktZahl = 0;
+        Player winner = null;
+        int maxScore = 0;
 
-        for (Spieler spieler : spielerManager.getSpieler()) {
+        for (Player spieler : playingManager.getSpieler()) {
 
-            int punktZahl = ermittlePunktzahl(spieler);
+            int score = investigatingScore(spieler);
 
-            if (punktZahl > maxPunktZahl) {
-                gewinner = spieler;
-                maxPunktZahl = punktZahl;
+            if (score > maxScore) {
+                winner = spieler;
+                maxScore = score;
             }
         }
 
-        return gewinner;
+        return winner;
     }
 
-    public int ermittlePunktzahl(Spieler spieler) {
+    public int investigatingScore(Player spieler) {
 
-        int punkte = 0;
+        int dots = 0;
 
-        for (Kaestchen kaestchen : spielfeld.getKaestchenListe())
-            if (kaestchen.getBesitzer() == spieler)
-                punkte++;
+        for (ShowBoxes kaestchen : playingField.getListBox())
+            if (kaestchen.getOwner() == spieler)
+                dots++;
 
-        return punkte;
+        return dots;
     }
 
 }

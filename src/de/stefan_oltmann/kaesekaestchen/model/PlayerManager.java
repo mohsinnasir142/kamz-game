@@ -28,46 +28,48 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+
 /**
  * Der SpielerManager bestimmt, welcher Spieler am Zug ist und wählt den
  * nächsten Spieler aus. Er kennt alle Mitspieler.
  * 
  * @author Stefan Oltmann
  */
-public class SpielerManager {
+public class PlayerManager {
 
-    /** Liste aller Spieler. */
-    private List<Spieler> spielerListe = new ArrayList<Spieler>();
+	/** List of all players. */
+	private List<Player> playerList = new ArrayList<Player>();
 
-    /** Der Spieler, der gerade am Zug ist. */
-    private Spieler       aktuellerSpieler;
+	/** The player, who is currently on train **/
+	private Player currentPlayer;
 
-    public SpielerManager() {
-    }
+	public PlayerManager() {
+	}
 
-    public void addSpieler(Spieler spieler) {
-        spielerListe.add(spieler);
-    }
+	public void addPlayers(Player player) {
+		playerList.add(player);
+	}
 
-    public List<Spieler> getSpieler() {
-        return Collections.unmodifiableList(spielerListe);
-    }
+	public List<Player> getSpieler() {
+		return Collections.unmodifiableList(playerList);
+	}
 
-    public Spieler getAktuellerSpieler() {
-        if (aktuellerSpieler == null)
-            throw new RuntimeException("Vor Abfrage des Spielers muss 'neuerZug' mindestens einmal aufgerufen worden sein!");
-        return aktuellerSpieler;
-    }
+	public Player getCurrentPlayer() {
+		if (currentPlayer == null)
+			throw new RuntimeException(
+					"Before answering the player must be 'new train' have been called at least once!");
+		return currentPlayer;
+	}
 
-    public void naechstenSpielerAuswaehlen() {
+	public void selectNextPlayer() {
 
-        int indexAktSpieler = spielerListe.indexOf(aktuellerSpieler);
+		int indexAktSpieler = playerList.indexOf(currentPlayer);
 
-        int indexNaechsterSpieler = indexAktSpieler + 1;
-        if (indexNaechsterSpieler > spielerListe.size() - 1)
-            indexNaechsterSpieler = 0;
+		int indexNaechsterSpieler = indexAktSpieler + 1;
+		if (indexNaechsterSpieler > playerList.size() - 1)
+			indexNaechsterSpieler = 0;
 
-        aktuellerSpieler = spielerListe.get(indexNaechsterSpieler);
-    }
+		currentPlayer = playerList.get(indexNaechsterSpieler);
+	}
 
 }

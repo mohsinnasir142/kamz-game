@@ -31,41 +31,39 @@ package de.stefan_oltmann.kaesekaestchen.model;
  */
 public enum PlayerType {
 
-    MENSCH,
-    COMPUTER_EINFACH,
-    COMPUTER_MITTEL,
-    COMPUTER_SCHWER;
+	MAN, COMPUTER_EASY, COMPUTER_MEDIUM, COMPUTER_HARD;
 
-    /**
-     * Wenn im Spinner ein Typ ausgew√§hlt wurde, k√∂nnen wir nur die
-     * String-Repr√§sentation davon abfragen. Der Spinner nimmt leider keine
-     * Enums entgegen. Deshalb m√ºssen wir den richtigen Typ aus dem String
-     * parsen.
-     */
-    public static PlayerType parse(String string) {
+	/**
+	 * If a Data of type was selected in the spinner, we can only K√ ∂ the
+	 * string Rep. presentation of query. Unfortunately, the spinner does not
+	 * accept enums. Therefore, we must m√ º parse the correct type from the
+	 * string.
+	 */
+	public static PlayerType parse(String string) {
 
-        if (string == null)
-            return null;
+		if (string == null)
+			return null;
 
-        if (string.equals("Mensch") || string.equals("Human"))
-            return MENSCH;
+		if (string.equals("Mensch") || string.equals("Human"))
+			return MAN;
 
-        if (string.equals("KI Leicht") || string.equals("KI Easy"))
-            return COMPUTER_EINFACH;
+		if (string.equals("KI Leicht") || string.equals("KI Easy"))
+			return COMPUTER_EASY;
 
-        if (string.equals("KI Mittel") || string.equals("KI Medium"))
-            return COMPUTER_MITTEL;
+		if (string.equals("KI Mittel") || string.equals("KI Medium"))
+			return COMPUTER_MEDIUM;
 
-        if (string.equals("KI Schwer") || string.equals("KI Hard"))
-            return COMPUTER_SCHWER;
+		if (string.equals("KI Schwer") || string.equals("KI Hard"))
+			return COMPUTER_HARD;
 
-        throw new IllegalArgumentException("Unbekannter SpielerTyp: " + string);
-    }
+		throw new IllegalArgumentException("Unbekannter SpielerTyp: " + string);
+	}
 
-    public boolean isComputerGegner() {
-        return this == PlayerType.COMPUTER_EINFACH
-                || this == PlayerType.COMPUTER_MITTEL
-                || this == PlayerType.COMPUTER_SCHWER;
-    }
+	public boolean iscomputerOpponent() {
+		return this == PlayerType.COMPUTER_EASY
+				|| this == PlayerType.COMPUTER_MEDIUM
+				|| this == PlayerType.COMPUTER_HARD;
+	}
 
 }
+
