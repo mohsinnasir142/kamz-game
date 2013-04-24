@@ -37,9 +37,9 @@ import android.widget.Spinner;
 import de.stefan_oltmann.kaesekaestchen.model.PlayerType;
 
 /**
- * Diese Activity wird bei Starten der App angezeigt. Hier wird ausgewählt, wer
- * die beiden Mitspieler sind.
- * 
+ *This activity appears when you start the app. Here is Selected � � hlt, who
+ * are the two players.
+
  * @author Stefan Oltmann
  */
 public class StartseiteActivity extends Activity implements OnClickListener {
@@ -57,10 +57,10 @@ public class StartseiteActivity extends Activity implements OnClickListener {
 
         setContentView(R.layout.startseite);
 
-        Button spielenButton = (Button) findViewById(R.id.spielen);
-        spielenButton.setOnClickListener(this);
+        Button playButton = (Button) findViewById(R.id.spielen);
+        playButton.setOnClickListener(this);
 
-        /* Aus gespeicherten Einstellungen den View wieder aufbauen. */
+        /* retrieve the settings to view. */
         SharedPreferences settings = getSharedPreferences(GAME_SETTINGS_KEY, MODE_PRIVATE);
         ((Spinner) findViewById(R.id.spieler_typ_1_spinner)).setSelection(settings.getInt("spielerTyp1", 0));
         ((Spinner) findViewById(R.id.spieler_typ_2_spinner)).setSelection(settings.getInt("spielerTyp2", 2));
@@ -69,8 +69,9 @@ public class StartseiteActivity extends Activity implements OnClickListener {
     }
 
     /**
-     * Diese Methode muss überschrieben werden, wenn ein Menü angezeigt werden
-     * soll. Die App benutzt dieses um ein Beenden-Menü anzubieten.
+     * *
+	 * This method must be overridden when a menu is displayed. The app uses
+	 * this to offer a Quit menu.
      */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -80,8 +81,7 @@ public class StartseiteActivity extends Activity implements OnClickListener {
     }
 
     /**
-     * Wurde in der Menüleiste eine Option gewählt, wird diese Methode
-     * aufgerufen.
+     * Was in the menu bar Option � hlt additional charges, this method is called.
      */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -94,13 +94,13 @@ public class StartseiteActivity extends Activity implements OnClickListener {
 
     public void onClick(View v) {
 
-        PlayerType spielerTyp1 = PlayerType.parse((String) ((Spinner) findViewById(R.id.spieler_typ_1_spinner)).getSelectedItem());
-        PlayerType spielerTyp2 = PlayerType.parse((String) ((Spinner) findViewById(R.id.spieler_typ_2_spinner)).getSelectedItem());
+        PlayerType playerTyp1 = PlayerType.parse((String) ((Spinner) findViewById(R.id.spieler_typ_1_spinner)).getSelectedItem());
+        PlayerType playerTyp2 = PlayerType.parse((String) ((Spinner) findViewById(R.id.spieler_typ_2_spinner)).getSelectedItem());
 
         int feldGroesseX = Integer.parseInt((String) ((Spinner) findViewById(R.id.feld_groesse_x)).getSelectedItem());
         int feldGroesseY = Integer.parseInt((String) ((Spinner) findViewById(R.id.feld_groesse_y)).getSelectedItem());
 
-        /* Werte in Settings speichern */
+        /* store values in settings using shared preferences */
         SharedPreferences settings = getSharedPreferences(GAME_SETTINGS_KEY, MODE_PRIVATE);
         SharedPreferences.Editor editor = settings.edit();
         editor.putInt("spielerTyp1", ((Spinner) findViewById(R.id.spieler_typ_1_spinner)).getSelectedItemPosition());
@@ -109,10 +109,10 @@ public class StartseiteActivity extends Activity implements OnClickListener {
         editor.putInt("feldGroesseY", ((Spinner) findViewById(R.id.feld_groesse_y)).getSelectedItemPosition());
         editor.commit();
 
-        /* Intent bauen */
-        Intent intent = new Intent(this, SpielActivity.class);
-        intent.putExtra("spielerTyp1", spielerTyp1);
-        intent.putExtra("spielerTyp2", spielerTyp2);
+        /* put data into intenet.Actually data is send by using intent and bundles */
+        Intent intent = new Intent(this, GameActivity.class);
+        intent.putExtra("spielerTyp1", playerTyp1);
+        intent.putExtra("spielerTyp2", playerTyp2);
         intent.putExtra("feldGroesseX", feldGroesseX);
         intent.putExtra("feldGroesseY", feldGroesseY);
 

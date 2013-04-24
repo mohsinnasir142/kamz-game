@@ -24,6 +24,7 @@
  */
 package de.stefan_oltmann.kaesekaestchen.model;
 
+
 import android.graphics.Bitmap;
 
 /**
@@ -32,43 +33,43 @@ import android.graphics.Bitmap;
  * 
  * @author Stefan Oltmann
  */
-public class Spieler {
+public class Player {
 
-    private String     name;
-    private Bitmap     symbol;
-    private int        farbe;
-    private PlayerType spielerTyp;
+	private String name;
+	private Bitmap symbol;
+	private int color;
+	private PlayerType playerType;
 
-    public Spieler(String name, Bitmap symbol, int farbe, PlayerType spielerTyp) {
-        this.name = name;
-        this.symbol = symbol;
-        this.farbe = farbe;
-        this.spielerTyp = spielerTyp;
-    }
+	public Player(String name, Bitmap symbol, int color, PlayerType playerType) {
+		this.name = name;
+		this.symbol = symbol;
+		this.color = color;
+		this.playerType = playerType;
+	}
 
-    public String getName() {
-        return name;
-    }
+	public String getName() {
+		return name;
+	}
 
-    public Bitmap getSymbol() {
-        return symbol;
-    }
+	public Bitmap getSymbol() {
+		return symbol;
+	}
 
-    public int getFarbe() {
-        return farbe;
-    }
+	public int getColor() {
+		return color;
+	}
 
-    public PlayerType getSpielerTyp() {
-        return spielerTyp;
-    }
+	public PlayerType getPlayerType() {
+		return playerType;
+	}
 
-    public boolean isComputerGegner() {
-        return spielerTyp.isComputerGegner();
-    }
+	public boolean isComputerOpponent() {
+		return playerType.iscomputerOpponent();
+	}
 
-    @Override
-    public String toString() {
-        return "Spieler [name=" + name + ", farbe=" + farbe + "]";
-    }
+	@Override
+	public String toString() {
+		return "Player [name=" + name + ", color=" + color + "]";
+	}
 
 }

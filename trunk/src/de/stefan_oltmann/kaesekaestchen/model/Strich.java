@@ -36,129 +36,132 @@ import java.util.List;
  */
 public class Strich {
 
-    /* ID des Striches */
-    private Kaestchen       kaestchenOben;
-    private Kaestchen       kaestchenUnten;
-    private Kaestchen       kaestchenLinks;
-    private Kaestchen       kaestchenRechts;
+	/* ID of the line */
+	private ShowBoxes topBox;
+	private ShowBoxes bottomBox;
+	private ShowBoxes leftBox;
+	private ShowBoxes rightBox;
 
-    /* Auflistung zum Durch-iterieren */
-    private List<Kaestchen> kaestchenListe = new ArrayList<Kaestchen>();
+	/* Collection to iterate through- */
+	private List<ShowBoxes> boxList = new ArrayList<ShowBoxes>();
 
-    private Spieler         besitzer;
+	private Player owner;
 
-    public Strich(Kaestchen kaestchenOben, Kaestchen kaestchenUnten,
-            Kaestchen kaestchenLinks, Kaestchen kaestchenRechts) {
+	public Strich(ShowBoxes topBox, ShowBoxes bottomBox, ShowBoxes leftBox, ShowBoxes rightBox) {
 
-        this.kaestchenOben = kaestchenOben;
-        this.kaestchenUnten = kaestchenUnten;
-        this.kaestchenLinks = kaestchenLinks;
-        this.kaestchenRechts = kaestchenRechts;
+		this.topBox = topBox;
+		this.bottomBox = bottomBox;
+		this.leftBox = leftBox;
+		this.rightBox = rightBox;
 
-        if (kaestchenOben != null)
-            kaestchenListe.add(kaestchenOben);
+		if (topBox != null)
+			boxList.add(topBox);
 
-        if (kaestchenUnten != null)
-            kaestchenListe.add(kaestchenUnten);
+		if (bottomBox != null)
+			boxList.add(bottomBox);
 
-        if (kaestchenLinks != null)
-            kaestchenListe.add(kaestchenLinks);
+		if (leftBox != null)
+			boxList.add(leftBox);
 
-        if (kaestchenRechts != null)
-            kaestchenListe.add(kaestchenRechts);
-    }
+		if (rightBox != null)
+			boxList.add(rightBox);
+	}
 
-    public Kaestchen getKaestchenOben() {
-        return kaestchenOben;
-    }
+	public ShowBoxes getTopBox() {
+		return topBox;
+	}
 
-    public Kaestchen getKaestchenUnten() {
-        return kaestchenUnten;
-    }
+	public ShowBoxes getBottomBox() {
+		return bottomBox;
+	}
 
-    public Kaestchen getKaestchenLinks() {
-        return kaestchenLinks;
-    }
+	public ShowBoxes getLeftBox() {
+		return leftBox;
+	}
 
-    public Kaestchen getKaestchenRechts() {
-        return kaestchenRechts;
-    }
+	public ShowBoxes getRightBox() {
+		return rightBox;
+	}
 
-    public List<Kaestchen> getKaestchenListe() {
-        return Collections.unmodifiableList(kaestchenListe);
-    }
+	public List<ShowBoxes> getListBox() {
+		return Collections.unmodifiableList(boxList);
+	}
 
-    /**
-     * Wenn eines der Kästchen um diesen Strich nur noch zwei Besitzer hat, dann
-     * h#tte es nach dem Setzen dieses Striches nur noch einen... Damit würde
-     * man dem Gegner ein Kästchen schenken.
-     */
-    public boolean isKoennteUmliegendendesKaestchenSchliessen() {
+	/**
+	 * If one of the box to clear at this bar only has two owners, it dannh #
+	 * tte after setting this stroke only one order'd give you a cheese boxes
+	 * show the opponent.
+	 */
 
-        for (Kaestchen kaestchen : kaestchenListe)
-            if (kaestchen.getStricheOhneBesitzer().size() <= 2)
-                return true;
+	// It could Surrounding In box Close(if surrounding box is closed)
+	public boolean isSurroundingBoxClose() {
 
-        return false;
-    }
+		for (ShowBoxes box : boxList)
+			if (box.getUnselectedLinesList().size() <= 2)
+				return true;
 
-    public Spieler getBesitzer() {
-        return besitzer;
-    }
+		return false;
+	}
 
-    public void setBesitzer(Spieler besitzer) {
-        this.besitzer = besitzer;
-    }
+	// get besitzer = get owner
+	public Player getOwner() {
+		return owner;
+	}
 
-    @Override
-    public String toString() {
-        return "Strich [kaestchenOben=" + kaestchenOben + ", kaestchenUnten="
-                + kaestchenUnten + ", kaestchenLinks=" + kaestchenLinks
-                + ", kaestchenRechts=" + kaestchenRechts + ", besitzer="
-                + besitzer + "]";
-    }
+	public void setOwner(Player owner) {
+		this.owner = owner;
+	}
 
-    @Override
-    public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + ((kaestchenLinks == null) ? 0 : kaestchenLinks.hashCode());
-        result = prime * result + ((kaestchenOben == null) ? 0 : kaestchenOben.hashCode());
-        result = prime * result + ((kaestchenRechts == null) ? 0 : kaestchenRechts.hashCode());
-        result = prime * result + ((kaestchenUnten == null) ? 0 : kaestchenUnten.hashCode());
-        return result;
-    }
+	@Override
+	public String toString() {
+		return "line [top Box=" + topBox + ", bottom box=" + bottomBox
+				+ ", left box=" + leftBox + ", right box=" + rightBox
+				+ ", owner=" + owner + "]";
+	}
 
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (obj == null)
-            return false;
-        if (getClass() != obj.getClass())
-            return false;
-        Strich other = (Strich) obj;
-        if (kaestchenLinks == null) {
-            if (other.kaestchenLinks != null)
-                return false;
-        } else if (!kaestchenLinks.equals(other.kaestchenLinks))
-            return false;
-        if (kaestchenOben == null) {
-            if (other.kaestchenOben != null)
-                return false;
-        } else if (!kaestchenOben.equals(other.kaestchenOben))
-            return false;
-        if (kaestchenRechts == null) {
-            if (other.kaestchenRechts != null)
-                return false;
-        } else if (!kaestchenRechts.equals(other.kaestchenRechts))
-            return false;
-        if (kaestchenUnten == null) {
-            if (other.kaestchenUnten != null)
-                return false;
-        } else if (!kaestchenUnten.equals(other.kaestchenUnten))
-            return false;
-        return true;
-    }
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((leftBox == null) ? 0 : leftBox.hashCode());
+		result = prime * result + ((topBox == null) ? 0 : topBox.hashCode());
+		result = prime * result
+				+ ((rightBox == null) ? 0 : rightBox.hashCode());
+		result = prime * result
+				+ ((bottomBox == null) ? 0 : bottomBox.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Strich other = (Strich) obj;
+		if (leftBox == null) {
+			if (other.leftBox != null)
+				return false;
+		} else if (!leftBox.equals(other.leftBox))
+			return false;
+		if (topBox == null) {
+			if (other.topBox != null)
+				return false;
+		} else if (!topBox.equals(other.topBox))
+			return false;
+		if (rightBox == null) {
+			if (other.rightBox != null)
+				return false;
+		} else if (!rightBox.equals(other.rightBox))
+			return false;
+		if (bottomBox == null) {
+			if (other.bottomBox != null)
+				return false;
+		} else if (!bottomBox.equals(other.bottomBox))
+			return false;
+		return true;
+	}
 
 }
