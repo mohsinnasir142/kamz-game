@@ -25,9 +25,7 @@
 package de.stefan_oltmann.kaesekaestchen.model;
 
 /**
- * Spieler können entweder Menschen sein oder eine von 3 KI-Stärken.
- * 
- * @author Stefan Oltmann
+ * KA player can be either human or POINTS of AI  bars. 
  */
 public enum PlayerType {
 

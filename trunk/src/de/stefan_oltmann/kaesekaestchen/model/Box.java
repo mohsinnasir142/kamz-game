@@ -38,11 +38,11 @@ import de.stefan_oltmann.kaesekaestchen.PlayerFieldView;
  * 
  * @author Stefan Oltmann
  */
-public class ShowBoxes {
+public class Box {
 
-	/*
-	 * Position of the cheese stand in the grid. This is about ¼ hiëra
-	 * identified, * so this is the ID.
+	/**
+	 * Position of the cheese stand in the grid. This is about 
+	 * identified,   so this is the ID.
 	 */
 	private int gridX;
 	private int gridY;
@@ -53,11 +53,11 @@ public class ShowBoxes {
 	 */
 	private Player owner;
 
-	/* Striche des KÃ¤stchens */
-	private Strich topLine;
-	private Strich bottomLine;
-	private Strich leftLine;
-	private Strich rightLine;
+	/* Bars of cheese pricking*/
+	private Line topLine;
+	private Line bottomLine;
+	private Line leftLine;
+	private Line rightLine;
 
 	private Paint framePaint = new Paint();
 
@@ -65,7 +65,7 @@ public class ShowBoxes {
 	 * Constructor to create the cheese stand. You must specify the position / *
 	 * ID of the box to clear it.
 	 */
-	public ShowBoxes(int gridX, int gridY) {
+	public Box(int gridX, int gridY) {
 		this.gridX = gridX;
 		this.gridY = gridY;
 
@@ -99,41 +99,41 @@ public class ShowBoxes {
 		this.owner = owner;
 	}
 
-	public Strich getTopLine() {
+	public Line getTopLine() {
 		return topLine;
 	}
 
-	public void setTopLine(Strich topLine) {
+	public void setTopLine(Line topLine) {
 		this.topLine = topLine;
 	}
 
-	public Strich getBottomLine() {
+	public Line getBottomLine() {
 		return bottomLine;
 	}
 
-	public void setBottomLine(Strich bottomLine) {
+	public void setBottomLine(Line bottomLine) {
 		this.bottomLine = bottomLine;
 	}
 
-	public Strich getLeftLine() {
+	public Line getLeftLine() {
 		return leftLine;
 	}
 
-	public void setLeftLine(Strich leftLine) {
+	public void setLeftLine(Line leftLine) {
 		this.leftLine = leftLine;
 	}
 
-	public Strich getrightLine() {
+	public Line getrightLine() {
 		return rightLine;
 	}
 
-	public void setRightLine(Strich rightLine) {
+	public void setRightLine(Line rightLine) {
 		this.rightLine = rightLine;
 	}
 
-	public List<Strich> getLines() {
+	public List<Line> getLines() {
 
-		List<Strich> line = new ArrayList<Strich>();
+		List<Line> line = new ArrayList<Line>();
 		if (topLine != null)
 			line.add(topLine);
 		if (bottomLine != null)
@@ -145,9 +145,9 @@ public class ShowBoxes {
 		return line;
 	}
 
-	public List<Strich> getUnselectedLinesList() {
+	public List<Line> getUnselectedLinesList() {
 
-		List<Strich> lineList = new ArrayList<Strich>();
+		List<Line> lineList = new ArrayList<Line>();
 		if (topLine != null && topLine.getOwner() == null)
 			lineList.add(topLine);
 		if (bottomLine != null && bottomLine.getOwner() == null)
@@ -159,7 +159,7 @@ public class ShowBoxes {
 		return lineList;
 	}
 
-	public boolean isAllLineHaveOwner() {
+	public boolean isEveryLineHasOwner() {
 		return getUnselectedLinesList().size() == 0;
 	}
 
@@ -213,7 +213,7 @@ public class ShowBoxes {
 	/**
 	 * This method determines which line of cheese bites in sequence
 	 */
-	public Strich determineLine(int pixelX, int pixelY) {
+	public Line determineLine(int pixelX, int pixelY) {
 
 		if (getRectTopLine() != null
 				&& getRectTopLine().contains(pixelX, pixelY))
@@ -321,7 +321,7 @@ public class ShowBoxes {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		ShowBoxes other = (ShowBoxes) obj;
+		Box other = (Box) obj;
 		if (gridX != other.gridX)
 			return false;
 		if (gridY != other.gridY)

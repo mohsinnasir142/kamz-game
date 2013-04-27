@@ -12,12 +12,12 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.widget.ImageView;
 import android.widget.TextView;
-import de.stefan_oltmann.kaesekaestchen.model.ShowBoxes;
+import de.stefan_oltmann.kaesekaestchen.model.Box;
 import de.stefan_oltmann.kaesekaestchen.model.Player;
 import de.stefan_oltmann.kaesekaestchen.model.PlayerManager;
 import de.stefan_oltmann.kaesekaestchen.model.PlayerType;
 import de.stefan_oltmann.kaesekaestchen.model.PlayerField;
-import de.stefan_oltmann.kaesekaestchen.model.Strich;
+import de.stefan_oltmann.kaesekaestchen.model.Line;
 
 /**
  * The main activity that manages the game and controls the Gameloop.
@@ -104,17 +104,17 @@ public class GameActivity extends Activity {
 					}
 				});
 
-				Strich line = null;
+				Line line = null;
 
 				if (!spieler.isComputerOpponent()) {
 
 					playingFieldView.resetLastInput();
 
 					/*
-					 * The user now has its input § t√ term. Gameloop this
+					 * The user now has its input term. Gameloop this
 					 * thread is now waiting. The wait () / notify () from Java
 					 * Technology Edition Note: is used here. As long as no new
-					 * entry was get account √ §, sleeps this thread now.
+					 * entry was get account  , sleeps this thread now.
 					 */
 					while ((line = playingFieldView.getLastInput()) == null) {
 						try {
@@ -124,7 +124,7 @@ public class GameActivity extends Activity {
 						} catch (InterruptedException ignore) {
 							/*
 							 * This case can be ignored. If the thread pl wake
-							 * up again tzlich √ ∂, it is provided that no input
+							 * up again , it is provided that no input
 							 * is Geta § account directly put to sleep again
 							 * surrounded by the while loop.
 							 */
@@ -233,19 +233,19 @@ public class GameActivity extends Activity {
 		return sb.toString();
 	}
 
-	private Strich computerGegnerZug(PlayerType spielerTyp) {
+	private Line computerGegnerZug(PlayerType spielerTyp) {
 
-		Strich strich = lastOpenLineForBox();
+		Line strich = lastOpenLineForBox();
 
 		if (strich != null)
 			return strich;
 
-		Strich randomLine = SelectRandomLine();
+		Line randomLine = SelectRandomLine();
 
 		/*
 		 * The easy AI just any line, the average AI fits at least, that is no
 		 * bar weight, the Complete boxes show a cheese train at the opponent k
-		 * √ ∂ and this might thus gives a point.
+		 * √  and this might thus gives a point.
 		 */
 		if (spielerTyp == PlayerType.COMPUTER_MEDIUM) {
 
@@ -269,26 +269,26 @@ public class GameActivity extends Activity {
 	}
 
 	// Last hand select open line for box
-	private Strich lastOpenLineForBox() {
+	private Line lastOpenLineForBox() {
 
-		for (ShowBoxes kaestchen : playingField.getOpenBoxList())
+		for (Box kaestchen : playingField.getOpenBoxList())
 			if (kaestchen.getUnselectedLinesList().size() == 1)
 				return kaestchen.getUnselectedLinesList().get(0);
 
 		return null;
 	}
 
-	private Strich SelectRandomLine() {
+	private Line SelectRandomLine() {
 
-		List<Strich> StrokesWithoutOwners = new ArrayList<Strich>(
+		List<Line> StrokesWithoutOwners = new ArrayList<Line>(
 				playingField.getStricheOhneBesitzer());
-		Strich randomLine = StrokesWithoutOwners.get(new Random()
+		Line randomLine = StrokesWithoutOwners.get(new Random()
 				.nextInt(StrokesWithoutOwners.size()));
 
 		return randomLine;
 	}
 
-	private void selectLine(Strich strich) {
+	private void selectLine(Line strich) {
 
 		if (strich.getOwner() != null)
 			return;
@@ -330,12 +330,12 @@ public class GameActivity extends Activity {
 		return winner;
 	}
 
-	public int investigatingScore(Player spieler) {
+	public int investigatingScore(Player player) {
 
 		int dots = 0;
 
-		for (ShowBoxes kaestchen : playingField.getListBox())
-			if (kaestchen.getOwner() == spieler)
+		for (Box box : playingField.getListBox())
+			if (box.getOwner() == player)
 				dots++;
 
 		return dots;
