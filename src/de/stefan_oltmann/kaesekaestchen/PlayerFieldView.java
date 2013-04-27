@@ -9,14 +9,12 @@ import android.view.View;
 import android.view.View.OnTouchListener;
 
 import de.stefan_oltmann.kaesekaestchen.model.PlayerField;
-import de.stefan_oltmann.kaesekaestchen.model.ShowBoxes;
-import de.stefan_oltmann.kaesekaestchen.model.Strich;
+import de.stefan_oltmann.kaesekaestchen.model.Box;
+import de.stefan_oltmann.kaesekaestchen.model.Line;
 
 /**
  * This class features the playing field and takes user interactions   *
- * Counter.
- * 
- * 
+ * Counter. 
  */
 public class PlayerFieldView extends View implements OnTouchListener {
 
@@ -29,7 +27,7 @@ public class PlayerFieldView extends View implements OnTouchListener {
 	 * About the last entry is brought to experience what the user        made.
 	 * The retrieval of this value is blocking it were in the game-flow.
 	 */
-	private volatile Strich lastInput;
+	private volatile Line lastInput;
 
 	/**
 	 * About the last entry is brought to experience what the users. The
@@ -45,7 +43,7 @@ public class PlayerFieldView extends View implements OnTouchListener {
 		setOnTouchListener(this);
 	}
 
-	public Strich getLastInput() {
+	public Line getLastInput() {
 
 		return lastInput;
 	}
@@ -95,7 +93,7 @@ public class PlayerFieldView extends View implements OnTouchListener {
 		 * represented correctly in the GUI editor.
 		 */
 
-		for (ShowBoxes box : PlayingField.getListBox()) {
+		for (Box box : PlayingField.getListBox()) {
 			box.onDraw(canvas);
 		}
 	}
@@ -110,7 +108,7 @@ public class PlayerFieldView extends View implements OnTouchListener {
 			return true;
 		/*
 		 * There are different motion events, but we are interested here only
-		 * the facts ¤ The actual on the screen.
+		 * the facts The actual on the screen.
 		 */
 
 		if (lastInput != null)
@@ -119,7 +117,7 @@ public class PlayerFieldView extends View implements OnTouchListener {
 		int calculatedgridX = (int) event.getX() / BOX_PAGE_LENGHT;
 		int calculatedgridY = (int) event.getY() / BOX_PAGE_LENGHT;
 
-		ShowBoxes box = PlayingField.getBox(calculatedgridX, calculatedgridY);
+		Box box = PlayingField.getBox(calculatedgridX, calculatedgridY);
 		/*
 		 * If any of the celebrity hardships position is no cheese or boxes show
 		 * This already has an owner, ignore the entry.
@@ -127,7 +125,7 @@ public class PlayerFieldView extends View implements OnTouchListener {
 		if (box == null || box.getOwner() != null)
 			return true;
 
-		Strich strich = box.determineLine((int) event.getX(),
+		Line strich = box.determineLine((int) event.getX(),
 				(int) event.getY());
 
 		/*

@@ -29,25 +29,23 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * Das Spielprinzip besteht daraus, Striche zu setzen um Kästchen zu schließen.
- * Diese Klasse repräsentiert einen solchen Strich.
- * 
- * @author Stefan Oltmann
+ * The gameplay consists of, to put dashes boxes show to cheese to close. This
+ * class is a representative of such a line. 
  */
-public class Strich {
+public class Line {
 
 	/* ID of the line */
-	private ShowBoxes topBox;
-	private ShowBoxes bottomBox;
-	private ShowBoxes leftBox;
-	private ShowBoxes rightBox;
+	private Box topBox;
+	private Box bottomBox;
+	private Box leftBox;
+	private Box rightBox;
 
 	/* Collection to iterate through- */
-	private List<ShowBoxes> boxList = new ArrayList<ShowBoxes>();
+	private List<Box> boxList = new ArrayList<Box>();
 
 	private Player owner;
 
-	public Strich(ShowBoxes topBox, ShowBoxes bottomBox, ShowBoxes leftBox, ShowBoxes rightBox) {
+	public Line(Box topBox, Box bottomBox, Box leftBox, Box rightBox) {
 
 		this.topBox = topBox;
 		this.bottomBox = bottomBox;
@@ -67,23 +65,23 @@ public class Strich {
 			boxList.add(rightBox);
 	}
 
-	public ShowBoxes getTopBox() {
+	public Box getTopBox() {
 		return topBox;
 	}
 
-	public ShowBoxes getBottomBox() {
+	public Box getBottomBox() {
 		return bottomBox;
 	}
 
-	public ShowBoxes getLeftBox() {
+	public Box getLeftBox() {
 		return leftBox;
 	}
 
-	public ShowBoxes getRightBox() {
+	public Box getRightBox() {
 		return rightBox;
 	}
 
-	public List<ShowBoxes> getListBox() {
+	public List<Box> getListBox() {
 		return Collections.unmodifiableList(boxList);
 	}
 
@@ -96,14 +94,14 @@ public class Strich {
 	// It could Surrounding In box Close(if surrounding box is closed)
 	public boolean isSurroundingBoxClose() {
 
-		for (ShowBoxes box : boxList)
+		for (Box box : boxList)
 			if (box.getUnselectedLinesList().size() <= 2)
 				return true;
 
 		return false;
 	}
 
-	// get besitzer = get owner
+	//   get owner
 	public Player getOwner() {
 		return owner;
 	}
@@ -140,7 +138,7 @@ public class Strich {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Strich other = (Strich) obj;
+		Line other = (Line) obj;
 		if (leftBox == null) {
 			if (other.leftBox != null)
 				return false;
