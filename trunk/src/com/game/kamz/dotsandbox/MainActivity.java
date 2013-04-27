@@ -1,4 +1,6 @@
-package de.stefan_oltmann.kaesekaestchen;
+package com.game.kamz.dotsandbox;
+
+import com.game.kamz.dotsandbox.model.PlayerType;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -10,7 +12,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.Spinner;
-import de.stefan_oltmann.kaesekaestchen.model.PlayerType;
+import com.game.kamz.dotsandbox.R;
 
 /**
  * This activity appears when you start the app. Here is Selected who are the

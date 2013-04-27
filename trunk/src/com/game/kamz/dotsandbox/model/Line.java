@@ -22,7 +22,7 @@
  * You should have received a copy of the GNU General Public License
  * along with Kaesekaestchen. If not, see <http://www.gnu.org/licenses/>.
  */
-package de.stefan_oltmann.kaesekaestchen.model;
+package com.game.kamz.dotsandbox.model;
 
 import java.util.ArrayList;
 import java.util.Collections;

@@ -1,8 +1,15 @@
-package de.stefan_oltmann.kaesekaestchen;
+package com.game.kamz.dotsandbox;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+
+import com.game.kamz.dotsandbox.model.Box;
+import com.game.kamz.dotsandbox.model.Line;
+import com.game.kamz.dotsandbox.model.Player;
+import com.game.kamz.dotsandbox.model.PlayerField;
+import com.game.kamz.dotsandbox.model.PlayerManager;
+import com.game.kamz.dotsandbox.model.PlayerType;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -12,12 +19,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.widget.ImageView;
 import android.widget.TextView;
-import de.stefan_oltmann.kaesekaestchen.model.Box;
-import de.stefan_oltmann.kaesekaestchen.model.Player;
-import de.stefan_oltmann.kaesekaestchen.model.PlayerManager;
-import de.stefan_oltmann.kaesekaestchen.model.PlayerType;
-import de.stefan_oltmann.kaesekaestchen.model.PlayerField;
-import de.stefan_oltmann.kaesekaestchen.model.Line;
+import com.game.kamz.dotsandbox.R;
 
 /**
  * The main activity that manages the game and controls the Gameloop.
