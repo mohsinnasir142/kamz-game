@@ -81,11 +81,11 @@ public class GameActivity extends Activity {
         playingManager.addPlayers(
                 new Player(getResources().getString(R.string.spieler_1_name),
                         BitmapFactory.decodeResource(getResources(), R.drawable.spieler_symbol_kaese),
-                        getResources().getColor(R.color.spieler_1_farbe), spielerTyp1));
+                        getResources().getColor(R.color.player_1_color), spielerTyp1));
         playingManager.addPlayers(
                 new Player(getResources().getString(R.string.spieler_2_name),
                         BitmapFactory.decodeResource(getResources(), R.drawable.spieler_symbol_maus),
-                        getResources().getColor(R.color.spieler_2_farbe), spielerTyp2));
+                        getResources().getColor(R.color.player_2_color), spielerTyp2));
 
         startGameLoop();
     }
