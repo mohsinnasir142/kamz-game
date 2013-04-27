@@ -31,7 +31,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
-import de.stefan_oltmann.kaesekaestchen.SpielfeldView;
+import de.stefan_oltmann.kaesekaestchen.PlayerFieldView;
 
 /**
  * Ein Kästchen auf dem Spielfeld.
@@ -82,13 +82,13 @@ public class ShowBoxes {
 	}
 
 	public int getPixelX() {
-		return gridX * SpielfeldView.BOX_PAGE_LENGHT
-				+ SpielfeldView.PADDING;
+		return gridX * PlayerFieldView.BOX_PAGE_LENGHT
+				+ PlayerFieldView.PADDING;
 	}
 
 	public int getPixelY() {
-		return gridY * SpielfeldView.BOX_PAGE_LENGHT
-				+ SpielfeldView.PADDING;
+		return gridY * PlayerFieldView.BOX_PAGE_LENGHT
+				+ PlayerFieldView.PADDING;
 	}
 
 	public Player getOwner() {
@@ -168,10 +168,10 @@ public class ShowBoxes {
 		if (topLine == null)
 			return null;
 
-		return new Rect(getPixelX() + SpielfeldView.BOX_PAGE_LENGHT/ 4,
-				getPixelY() - SpielfeldView.BOX_PAGE_LENGHT / 4, getPixelX()
-						+ (int) (SpielfeldView.BOX_PAGE_LENGHT * 0.75),
-				getPixelY() + SpielfeldView.BOX_PAGE_LENGHT / 4);
+		return new Rect(getPixelX() + PlayerFieldView.BOX_PAGE_LENGHT/ 4,
+				getPixelY() - PlayerFieldView.BOX_PAGE_LENGHT / 4, getPixelX()
+						+ (int) (PlayerFieldView.BOX_PAGE_LENGHT * 0.75),
+				getPixelY() + PlayerFieldView.BOX_PAGE_LENGHT / 4);
 	}
 
 	public Rect getRectBottomLine() {
@@ -179,11 +179,11 @@ public class ShowBoxes {
 		if (bottomLine == null)
 			return null;
 
-		return new Rect(getPixelX() + SpielfeldView.BOX_PAGE_LENGHT / 4,
-				getPixelY() + (int) (SpielfeldView.BOX_PAGE_LENGHT * 0.75),
-				getPixelX() + (int) (SpielfeldView.BOX_PAGE_LENGHT * 0.75),
-				getPixelY() + SpielfeldView.BOX_PAGE_LENGHT
-						+ SpielfeldView.BOX_PAGE_LENGHT / 4);
+		return new Rect(getPixelX() + PlayerFieldView.BOX_PAGE_LENGHT / 4,
+				getPixelY() + (int) (PlayerFieldView.BOX_PAGE_LENGHT * 0.75),
+				getPixelX() + (int) (PlayerFieldView.BOX_PAGE_LENGHT * 0.75),
+				getPixelY() + PlayerFieldView.BOX_PAGE_LENGHT
+						+ PlayerFieldView.BOX_PAGE_LENGHT / 4);
 	}
 
 	public Rect getRectLeftLine() {
@@ -191,10 +191,10 @@ public class ShowBoxes {
 		if (leftLine == null)
 			return null;
 
-		return new Rect(getPixelX() - SpielfeldView.BOX_PAGE_LENGHT / 4,
-				getPixelY() + SpielfeldView.BOX_PAGE_LENGHT / 4, getPixelX()
-						+ SpielfeldView.BOX_PAGE_LENGHT / 4, getPixelY()
-						+ (int) (SpielfeldView.BOX_PAGE_LENGHT * 0.75));
+		return new Rect(getPixelX() - PlayerFieldView.BOX_PAGE_LENGHT / 4,
+				getPixelY() + PlayerFieldView.BOX_PAGE_LENGHT / 4, getPixelX()
+						+ PlayerFieldView.BOX_PAGE_LENGHT / 4, getPixelY()
+						+ (int) (PlayerFieldView.BOX_PAGE_LENGHT * 0.75));
 	}
 
 	public Rect getRectRightLine() {
@@ -203,11 +203,11 @@ public class ShowBoxes {
 			return null;
 
 		return new Rect(getPixelX()
-				+ (int) (SpielfeldView.BOX_PAGE_LENGHT * 0.75), getPixelY()
-				+ SpielfeldView.BOX_PAGE_LENGHT / 4, getPixelX()
-				+ SpielfeldView.BOX_PAGE_LENGHT
-				+ SpielfeldView.BOX_PAGE_LENGHT / 4, getPixelY()
-				+ (int) (SpielfeldView.BOX_PAGE_LENGHT * 0.75));
+				+ (int) (PlayerFieldView.BOX_PAGE_LENGHT * 0.75), getPixelY()
+				+ PlayerFieldView.BOX_PAGE_LENGHT / 4, getPixelX()
+				+ PlayerFieldView.BOX_PAGE_LENGHT
+				+ PlayerFieldView.BOX_PAGE_LENGHT / 4, getPixelY()
+				+ (int) (PlayerFieldView.BOX_PAGE_LENGHT * 0.75));
 	}
 
 	/**
@@ -242,15 +242,15 @@ public class ShowBoxes {
 			fillingPaint.setColor(owner.getColor());
 
 			Rect destRect = new Rect(getPixelX(), getPixelY(), getPixelX()
-					+ SpielfeldView.BOX_PAGE_LENGHT, getPixelY()
-					+ SpielfeldView.BOX_PAGE_LENGHT);
+					+ PlayerFieldView.BOX_PAGE_LENGHT, getPixelY()
+					+ PlayerFieldView.BOX_PAGE_LENGHT);
 			canvas.drawBitmap(owner.getSymbol(), null, destRect, framePaint);
 		}
 
 		if (topLine == null) {
 			framePaint.setColor(Color.BLACK);
 			canvas.drawLine(getPixelX(), getPixelY(), getPixelX()
-					+ SpielfeldView.BOX_PAGE_LENGHT, getPixelY(), framePaint);
+					+ PlayerFieldView.BOX_PAGE_LENGHT, getPixelY(), framePaint);
 		}
 
 		if (bottomLine != null && bottomLine.getOwner() != null)
@@ -261,14 +261,14 @@ public class ShowBoxes {
 			framePaint.setColor(Color.BLACK);
 
 		canvas.drawLine(getPixelX(), getPixelY()
-				+ SpielfeldView.BOX_PAGE_LENGHT, getPixelX()
-				+ SpielfeldView.BOX_PAGE_LENGHT, getPixelY()
-				+ SpielfeldView.BOX_PAGE_LENGHT, framePaint);
+				+ PlayerFieldView.BOX_PAGE_LENGHT, getPixelX()
+				+ PlayerFieldView.BOX_PAGE_LENGHT, getPixelY()
+				+ PlayerFieldView.BOX_PAGE_LENGHT, framePaint);
 
 		if (leftLine == null) {
 			framePaint.setColor(Color.BLACK);
 			canvas.drawLine(getPixelX(), getPixelY(), getPixelX(), getPixelY()
-					+ SpielfeldView.BOX_PAGE_LENGHT, framePaint);
+					+ PlayerFieldView.BOX_PAGE_LENGHT, framePaint);
 		}
 
 		if (rightLine != null && rightLine.getOwner() != null)
@@ -278,24 +278,24 @@ public class ShowBoxes {
 		else
 			framePaint.setColor(Color.BLACK);
 
-		canvas.drawLine(getPixelX() + SpielfeldView.BOX_PAGE_LENGHT,
-				getPixelY(), getPixelX() + SpielfeldView.BOX_PAGE_LENGHT,
-				getPixelY() + SpielfeldView.BOX_PAGE_LENGHT, framePaint);
+		canvas.drawLine(getPixelX() + PlayerFieldView.BOX_PAGE_LENGHT,
+				getPixelY(), getPixelX() + PlayerFieldView.BOX_PAGE_LENGHT,
+				getPixelY() + PlayerFieldView.BOX_PAGE_LENGHT, framePaint);
 
 		/* vertices draw */
 		framePaint.setColor(Color.BLACK);
 		canvas.drawRect(getPixelX() - 1, getPixelY() - 1, getPixelX() + 1,
 				getPixelY() + 1, framePaint);
-		canvas.drawRect(getPixelX() + SpielfeldView.BOX_PAGE_LENGHT - 1,
-				getPixelY() - 1, getPixelX() + SpielfeldView.BOX_PAGE_LENGHT
+		canvas.drawRect(getPixelX() + PlayerFieldView.BOX_PAGE_LENGHT - 1,
+				getPixelY() - 1, getPixelX() + PlayerFieldView.BOX_PAGE_LENGHT
 						+ 1, getPixelY() + 1, framePaint);
 		canvas.drawRect(getPixelX() - 1, getPixelY()
-				+ SpielfeldView.BOX_PAGE_LENGHT - 1, getPixelX() + 1,
-				getPixelY() + SpielfeldView.BOX_PAGE_LENGHT + 1, framePaint);
-		canvas.drawRect(getPixelX() + SpielfeldView.BOX_PAGE_LENGHT - 1,
-				getPixelY() + SpielfeldView.BOX_PAGE_LENGHT - 1, getPixelX()
-						+ SpielfeldView.BOX_PAGE_LENGHT + 1, getPixelY()
-						+ SpielfeldView.BOX_PAGE_LENGHT + 1, framePaint);
+				+ PlayerFieldView.BOX_PAGE_LENGHT - 1, getPixelX() + 1,
+				getPixelY() + PlayerFieldView.BOX_PAGE_LENGHT + 1, framePaint);
+		canvas.drawRect(getPixelX() + PlayerFieldView.BOX_PAGE_LENGHT - 1,
+				getPixelY() + PlayerFieldView.BOX_PAGE_LENGHT - 1, getPixelX()
+						+ PlayerFieldView.BOX_PAGE_LENGHT + 1, getPixelY()
+						+ PlayerFieldView.BOX_PAGE_LENGHT + 1, framePaint);
 	}
 
 	@Override

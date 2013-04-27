@@ -49,7 +49,7 @@ import de.stefan_oltmann.kaesekaestchen.model.Strich;
  */
 public class GameActivity extends Activity {
 
-    private SpielfeldView    playingFieldView;
+    private PlayerFieldView    playingFieldView;
     private PlayerField        playingField;
     private PlayerManager   playingManager;
 
@@ -75,7 +75,7 @@ public class GameActivity extends Activity {
         playingField = PlayerField.generate(feldGroesseX, feldGroesseY);
         playingManager = new PlayerManager();
 
-        playingFieldView = (SpielfeldView) findViewById(R.id.spielfeldView);
+        playingFieldView = (PlayerFieldView) findViewById(R.id.spielfeldView);
         playingFieldView.init(playingField);
 
         playingManager.addPlayers(
