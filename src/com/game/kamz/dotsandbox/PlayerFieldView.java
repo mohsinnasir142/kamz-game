@@ -1,4 +1,8 @@
-package de.stefan_oltmann.kaesekaestchen;
+package com.game.kamz.dotsandbox;
+
+import com.game.kamz.dotsandbox.model.Box;
+import com.game.kamz.dotsandbox.model.Line;
+import com.game.kamz.dotsandbox.model.PlayerField;
 
 import android.content.Context;
 import android.graphics.Canvas;
@@ -8,9 +12,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnTouchListener;
 
-import de.stefan_oltmann.kaesekaestchen.model.PlayerField;
-import de.stefan_oltmann.kaesekaestchen.model.Box;
-import de.stefan_oltmann.kaesekaestchen.model.Line;
+import com.game.kamz.dotsandbox.R;
 
 /**
  * This class features the playing field and takes user interactions   *

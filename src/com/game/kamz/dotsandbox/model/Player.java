@@ -1,4 +1,4 @@
-package de.stefan_oltmann.kaesekaestchen.model;
+package com.game.kamz.dotsandbox.model;
 
 import android.graphics.Bitmap;
 

@@ -22,16 +22,17 @@
  * You should have received a copy of the GNU General Public License
  * along with Kaesekaestchen. If not, see <http://www.gnu.org/licenses/>.
  */
-package de.stefan_oltmann.kaesekaestchen.model;
+package com.game.kamz.dotsandbox.model;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import com.game.kamz.dotsandbox.PlayerFieldView;
 
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
-import de.stefan_oltmann.kaesekaestchen.PlayerFieldView;
 
 /**
  * Ein Kästchen auf dem Spielfeld.
