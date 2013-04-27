@@ -31,11 +31,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
-
 /**
- * Das Spielfeld.
- * 
- * @author Stefan Oltmann
+ * The game field.
  */
 public class PlayerField {
 
@@ -45,12 +42,12 @@ public class PlayerField {
 	private ShowBoxes[][] boxArray;
 
 	/**
-	 * A second list is º vascular diseases deriving from performance-Green
-	 * leads to the 'kaestchenListe' not so h√ § must be frequently iterates
+	 * A second list is  vascular diseases deriving from performance-Green
+	 * leads to the 'kaestchenListe' not so   must be frequently iterates
 	 * through-. For this leads to poor performance in large fields.
 	 */
 	private List<ShowBoxes> openBoxesList = new ArrayList<ShowBoxes>();
-	// stricheOhneBesitzer= strokes without owner
+	//   strokes without owner
 	private Set<Strich> strokesWithoutOwners = new HashSet<Strich>();
 
 	/**
@@ -111,18 +108,17 @@ public class PlayerField {
 	}
 
 	/**
-	 Closes all box to clear it, the KA ∂ can be closed.
-†† @ param zuzuweisenderBesitzer
-††† Boxes show the owner of this cheese to be assigned
-†† Could @ return a box to clear it be closed? (Important for gameplay)       
-	 *         
+	 * Closes all box to clear it, the KA ∂ can be closed. †† @ param
+	 * zuzuweisenderBesitzer ††† Boxes show the owner of this cheese to be
+	 * assigned †† Could @ return a box to clear it be closed? (Important for
+	 * gameplay)
+	 * 
 	 */
-	
-	//zuzuweisenderBesitzer==assign and owner
-	private boolean concludeAllPossibleBox(
-			Player zuzuweisenderBesitzer) {
-//Closed box Could Become
-		boolean kaestchenKonnteGeschlossenWerden = false;
+
+	//  =assign and owner
+	private boolean concludeAllPossibleBox(Player zuzuweisenderBesitzer) {
+		// Closed box Could Become
+		boolean isBoxClosed = false;
 
 		Iterator<ShowBoxes> openBoxes = openBoxesList.iterator();
 
@@ -130,15 +126,14 @@ public class PlayerField {
 
 			ShowBoxes box = openBoxes.next();
 
-			if (box.isAllLineHaveOwner()
-					&& box.getOwner() == null) {
+			if (box.isAllLineHaveOwner() && box.getOwner() == null) {
 				box.setOwner(zuzuweisenderBesitzer);
 				openBoxes.remove();
-				kaestchenKonnteGeschlossenWerden = true;
+				isBoxClosed = true;
 			}
 		}
 
-		return kaestchenKonnteGeschlossenWerden;
+		return isBoxClosed;
 	}
 
 	public boolean isAllOwnerHaveBoxes() {
@@ -174,17 +169,13 @@ public class PlayerField {
 				ShowBoxes rightBox = null;
 
 				if (gridY < numberV - 1)
-					bottomBox = playingField.getBox(gridX,
-							gridY + 1);
+					bottomBox = playingField.getBox(gridX, gridY + 1);
 
 				if (gridX < numberH - 1)
-					rightBox = playingField.getBox(gridX + 1,
-							gridY);
+					rightBox = playingField.getBox(gridX + 1, gridY);
 
-				Strich strichUnten = new Strich(box, bottomBox, null,
-						null);
-				Strich strichRechts = new Strich(null, null, box,
-						rightBox);
+				Strich strichUnten = new Strich(box, bottomBox, null, null);
+				Strich strichRechts = new Strich(null, null, box, rightBox);
 
 				if (rightBox != null) {
 					box.setRightLine(strichRechts);
