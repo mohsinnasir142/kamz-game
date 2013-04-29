@@ -33,19 +33,19 @@ public class MainActivity extends Activity implements OnClickListener {
 
 		setContentView(R.layout.startseite);
 
-		Button playButton = (Button) findViewById(R.id.spielen);
+		Button playButton = (Button) findViewById(R.id.play);
 		playButton.setOnClickListener(this);
 
 		/* retrieve the settings to view. */
 		SharedPreferences settings = getSharedPreferences(GAME_SETTINGS_KEY,
 				MODE_PRIVATE);
-		((Spinner) findViewById(R.id.spieler_typ_1_spinner))
+		((Spinner) findViewById(R.id.player_type_1_spinner))
 				.setSelection(settings.getInt("spielerTyp1", 0));
-		((Spinner) findViewById(R.id.spieler_typ_2_spinner))
+		((Spinner) findViewById(R.id.player_type_2_spinner))
 				.setSelection(settings.getInt("spielerTyp2", 2));
-		((Spinner) findViewById(R.id.feld_groesse_x)).setSelection(settings
+		((Spinner) findViewById(R.id.field_size_x)).setSelection(settings
 				.getInt("feldGroesseX", 3));
-		((Spinner) findViewById(R.id.feld_groesse_y)).setSelection(settings
+		((Spinner) findViewById(R.id.field_size_y)).setSelection(settings
 				.getInt("feldGroesseY", 3));
 	}
 
@@ -56,7 +56,7 @@ public class MainActivity extends Activity implements OnClickListener {
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		super.onCreateOptionsMenu(menu);
-		getMenuInflater().inflate(R.menu.hauptmenue, menu);
+		getMenuInflater().inflate(R.menu.mainmenu, menu);
 		return true;
 	}
 
@@ -76,17 +76,17 @@ public class MainActivity extends Activity implements OnClickListener {
 	public void onClick(View v) {
 
 		PlayerType playerTyp1 = PlayerType
-				.parse((String) ((Spinner) findViewById(R.id.spieler_typ_1_spinner))
+				.parse((String) ((Spinner) findViewById(R.id.player_type_1_spinner))
 						.getSelectedItem());
 		PlayerType playerTyp2 = PlayerType
-				.parse((String) ((Spinner) findViewById(R.id.spieler_typ_2_spinner))
+				.parse((String) ((Spinner) findViewById(R.id.player_type_2_spinner))
 						.getSelectedItem());
 
 		int feldGroesseX = Integer
-				.parseInt((String) ((Spinner) findViewById(R.id.feld_groesse_x))
+				.parseInt((String) ((Spinner) findViewById(R.id.field_size_x))
 						.getSelectedItem());
 		int feldGroesseY = Integer
-				.parseInt((String) ((Spinner) findViewById(R.id.feld_groesse_y))
+				.parseInt((String) ((Spinner) findViewById(R.id.field_size_y))
 						.getSelectedItem());
 
 		/* store values in settings using shared preferences */
@@ -94,16 +94,16 @@ public class MainActivity extends Activity implements OnClickListener {
 				MODE_PRIVATE);
 		SharedPreferences.Editor editor = settings.edit();
 		editor.putInt("spielerTyp1",
-				((Spinner) findViewById(R.id.spieler_typ_1_spinner))
+				((Spinner) findViewById(R.id.player_type_1_spinner))
 						.getSelectedItemPosition());
 		editor.putInt("spielerTyp2",
-				((Spinner) findViewById(R.id.spieler_typ_2_spinner))
+				((Spinner) findViewById(R.id.player_type_2_spinner))
 						.getSelectedItemPosition());
 		editor.putInt("feldGroesseX",
-				((Spinner) findViewById(R.id.feld_groesse_x))
+				((Spinner) findViewById(R.id.field_size_x))
 						.getSelectedItemPosition());
 		editor.putInt("feldGroesseY",
-				((Spinner) findViewById(R.id.feld_groesse_y))
+				((Spinner) findViewById(R.id.field_size_y))
 						.getSelectedItemPosition());
 		editor.commit();
 

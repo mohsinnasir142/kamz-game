@@ -25,7 +25,7 @@
 package com.game.kamz.dotsandbox.model;
 
 /**
- * KA player can be either human or POINTS of AI  bars. 
+ * KA player can be either human or POINTS of AI bars.
  */
 public enum PlayerType {
 
@@ -42,16 +42,16 @@ public enum PlayerType {
 		if (string == null)
 			return null;
 
-		if (string.equals("Mensch") || string.equals("Human"))
+		if (string.equals("Human"))
 			return MAN;
 
-		if (string.equals("KI Leicht") || string.equals("KI Easy"))
+		if (string.equals("AI Easy"))
 			return COMPUTER_EASY;
 
-		if (string.equals("KI Mittel") || string.equals("KI Medium"))
+		if (string.equals("AI Medium"))
 			return COMPUTER_MEDIUM;
 
-		if (string.equals("KI Schwer") || string.equals("KI Hard"))
+		if (string.equals("KI Hard"))
 			return COMPUTER_HARD;
 
 		throw new IllegalArgumentException("Unbekannter SpielerTyp: " + string);
@@ -64,4 +64,3 @@ public enum PlayerType {
 	}
 
 }
-

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="SpielerNamen">
-        <item name="android:textSize">30sp</item>
+    <style name="PlayerNames">
+        <item name="android:textSize">20sp</item>
         <item name="android:textColor">#000</item>
     </style>
 </resources>
