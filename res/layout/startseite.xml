@@ -7,20 +7,37 @@
     android:orientation="vertical"
     android:scrollbars="horizontal" >
 
-    <ImageView
-        android:layout_width="wrap_content"
+    <TableLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginBottom="5dip"
-        android:layout_marginTop="10dip"
-        android:src="@drawable/icon_large" />
+        android:layout_marginLeft="5dip"
+        android:layout_marginRight="5dip"
+        android:layout_marginTop="5dip"
+        android:stretchColumns="1" >
+<TableRow >
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="5dip"
+            android:layout_marginTop="2dip"
+            android:src="@drawable/icon_large" />
+
+        <Button
+            android:id="@+id/button1"
+            android:layout_gravity="right"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Button" />
+        </TableRow>
+    </TableLayout>
 
     <View
         android:layout_width="fill_parent"
         android:layout_height="3dp"
         android:background="@android:color/black"
         android:gravity="center_vertical" />
-
 
     <TableLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
@@ -35,10 +52,10 @@
             <ImageView android:src="@drawable/spieler_symbol_kaese" />
 
             <Spinner
-                android:id="@+id/spieler_typ_1_spinner"
+                android:id="@+id/player_type_1_spinner"
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="10dip"
-                android:entries="@array/spielerTypen" />
+                android:entries="@array/playerTypes" />
         </TableRow>
 
         <TableRow>
@@ -46,10 +63,10 @@
             <ImageView android:src="@drawable/spieler_symbol_maus" />
 
             <Spinner
-                android:id="@+id/spieler_typ_2_spinner"
+                android:id="@+id/player_type_2_spinner"
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="10dip"
-                android:entries="@array/spielerTypen" />
+                android:entries="@array/playerTypes" />
         </TableRow>
     </TableLayout>
 
@@ -59,38 +76,38 @@
         android:gravity="center_vertical|center_horizontal" >
 
         <TextView
-            style="@style/SpielerNamen"
+            style="@style/PlayerNames"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/feld_groesse" />
+            android:text="@string/feld_dimension" />
 
         <Spinner
-            android:id="@+id/feld_groesse_x"
+            android:id="@+id/field_size_x"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:entries="@array/feldGroessen" />
+            android:entries="@array/fieldDimension" />
 
         <TextView
-            style="@style/SpielerNamen"
+            style="@style/PlayerNames"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="x" />
 
         <Spinner
-            android:id="@+id/feld_groesse_y"
+            android:id="@+id/field_size_y"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:entries="@array/feldGroessen" />
+            android:entries="@array/fieldDimension" />
     </LinearLayout>
 
     <Button
-        android:id="@+id/spielen"
+        android:id="@+id/play"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="10dip"
         android:drawableLeft="@drawable/spielen"
         android:drawablePadding="10dip"
-        android:text="@string/spielen" />
+        android:text="@string/play" />
 
 </LinearLayout>

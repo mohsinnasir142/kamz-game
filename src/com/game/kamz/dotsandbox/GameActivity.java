@@ -56,11 +56,11 @@ public class GameActivity extends Activity {
 		playingFieldView.init(playingField);
 
 		playingManager.addPlayers(new Player(getResources().getString(
-				R.string.spieler_1_name), BitmapFactory.decodeResource(
+				R.string.player_1_name), BitmapFactory.decodeResource(
 				getResources(), R.drawable.spieler_symbol_kaese),
 				getResources().getColor(R.color.player_1_color), spielerTyp1));
 		playingManager.addPlayers(new Player(getResources().getString(
-				R.string.spieler_2_name), BitmapFactory.decodeResource(
+				R.string.player_2_name), BitmapFactory.decodeResource(
 				getResources(), R.drawable.spieler_symbol_maus), getResources()
 				.getColor(R.color.player_2_color), spielerTyp2));
 
@@ -174,7 +174,7 @@ public class GameActivity extends Activity {
 						int pokalBildID = 0;
 						if (gewinner.getName().equals(
 								getResources().getString(
-										R.string.spieler_1_name)))
+										R.string.player_1_name)))
 							pokalBildID = R.drawable.pokal_kaese;
 						else
 							pokalBildID = R.drawable.pokal_maus;
@@ -201,7 +201,7 @@ public class GameActivity extends Activity {
 								.setNegativeButton(
 										getResources()
 												.getText(
-														R.string.zurueck_zum_hauptmenue),
+														R.string.main_menu),
 										new DialogInterface.OnClickListener() {
 											public void onClick(
 													DialogInterface dialog,
@@ -225,7 +225,7 @@ public class GameActivity extends Activity {
 
 		StringBuilder sb = new StringBuilder();
 
-		sb.append(getResources().getString(R.string.gewinner) + ": "
+		sb.append(getResources().getString(R.string.winner) + ": "
 				+ gewinner.getName() + "\n\n");
 
 		for (Player spieler : playingManager.getSpieler())

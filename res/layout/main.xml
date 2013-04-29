@@ -18,9 +18,9 @@
             android:layout_height="wrap_content" >
 
             <TextView
-                style="@style/SpielerNamen"
+                style="@style/PlayerNames"
                 android:layout_gravity="center_vertical"
-                android:text="@string/spieler" />
+                android:text="@string/player" />
 
             <ImageView
                 android:id="@+id/aktuellerSpielerSymbol"
@@ -30,7 +30,7 @@
 
             <TextView
                 android:id="@+id/punkteAnzeige"
-                style="@style/SpielerNamen"
+                style="@style/PlayerNames"
                 android:layout_gravity="center_vertical" />
         </TableRow>
     </TableLayout>

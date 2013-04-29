@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <array name="spielerTypen">
-        <item>Mensch</item>
-        <item>KI Leicht</item>
-        <item>KI Mittel</item>
+
+    <array name="playerTypes">
+        <item>Human</item>
+        <item>AI Easy</item>
+        <item>AI Medium</item>
         <!-- item>KI Schwer</item -->
     </array>
-    <array name="feldGroessen">
+    <array name="fieldDimension">
         <item>"3"</item>
         <item>"4"</item>
         <item>"5"</item>
@@ -21,4 +22,5 @@
         <item>"14"</item>
         <item>"15"</item>
     </array>
+
 </resources>
