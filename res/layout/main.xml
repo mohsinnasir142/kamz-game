@@ -11,7 +11,8 @@
         android:id="@+id/tableLayout1"
         android:layout_width="fill_parent"
         android:layout_height="50dp"
-        android:orientation="horizontal" >
+        android:orientation="horizontal"
+        android:stretchColumns="1" >
 
         <TableRow
             android:layout_width="wrap_content"
@@ -32,6 +33,13 @@
                 android:id="@+id/punkteAnzeige"
                 style="@style/PlayerNames"
                 android:layout_gravity="center_vertical" />
+
+            <Button
+                android:id="@+id/about"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:text="@string/about" />
         </TableRow>
     </TableLayout>
 
