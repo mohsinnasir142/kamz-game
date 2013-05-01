@@ -24,15 +24,16 @@
                 android:text="@string/player" />
 
             <ImageView
-                android:id="@+id/aktuellerSpielerSymbol"
+                android:id="@+id/currentPlayrIcon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/spieler_symbol_kaese" />
+                android:src="@drawable/player_symol_tick" />
 
             <TextView
-                android:id="@+id/punkteAnzeige"
+                android:id="@+id/displayScore"
                 style="@style/PlayerNames"
-                android:layout_gravity="center_vertical" />
+                android:layout_gravity="center_horizontal"
+                 />
 
             <Button
                 android:id="@+id/about"
@@ -44,7 +45,7 @@
     </TableLayout>
 
     <com.game.kamz.dotsandbox.PlayerFieldView
-        android:id="@+id/spielfeldView"
+        android:id="@+id/playerfieldview"
         android:layout_width="wrap_content"
         android:layout_height="fill_parent" />
 

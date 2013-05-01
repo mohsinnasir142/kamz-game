@@ -23,7 +23,7 @@ public class PlayerManager {
 		playerList.add(player);
 	}
 
-	public List<Player> getSpieler() {
+	public List<Player> getPlayer() {
 		return Collections.unmodifiableList(playerList);
 	}
 
