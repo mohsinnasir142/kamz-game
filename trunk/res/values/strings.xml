@@ -11,4 +11,7 @@
     <string name="winner">Winner</string>
     <string name="play_again">Play again!</string>
     <string name="main_menu">main menu</string>
+    <string name="about">About</string>
+    <string name="player1">Player 1</string>
+    <string name="player2">Player 2</string>
 </resources> 
