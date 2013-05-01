@@ -51,7 +51,7 @@
 
         <TableRow>
 
-            <ImageView android:src="@drawable/spieler_symbol_kaese" />
+            <ImageView android:src="@drawable/player_symol_tick" />
 
             <Spinner
                 android:id="@+id/player_type_1_spinner"
@@ -62,7 +62,7 @@
 
         <TableRow>
 
-            <ImageView android:src="@drawable/spieler_symbol_maus" />
+            <ImageView android:src="@drawable/player_symol_cross" />
 
             <Spinner
                 android:id="@+id/player_type_2_spinner"
@@ -108,7 +108,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="10dip"
-        android:drawableLeft="@drawable/spielen"
+        android:drawableLeft="@drawable/play"
         android:drawablePadding="10dip"
         android:text="@string/play" />
 

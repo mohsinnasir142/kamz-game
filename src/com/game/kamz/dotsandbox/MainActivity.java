@@ -40,13 +40,13 @@ public class MainActivity extends Activity implements OnClickListener {
 		SharedPreferences settings = getSharedPreferences(GAME_SETTINGS_KEY,
 				MODE_PRIVATE);
 		((Spinner) findViewById(R.id.player_type_1_spinner))
-				.setSelection(settings.getInt("spielerTyp1", 0));
+				.setSelection(settings.getInt("playerType1", 0));
 		((Spinner) findViewById(R.id.player_type_2_spinner))
-				.setSelection(settings.getInt("spielerTyp2", 2));
+				.setSelection(settings.getInt("playerType2", 2));
 		((Spinner) findViewById(R.id.field_size_x)).setSelection(settings
-				.getInt("feldGroesseX", 3));
+				.getInt("fieldSizeX", 3));
 		((Spinner) findViewById(R.id.field_size_y)).setSelection(settings
-				.getInt("feldGroesseY", 3));
+				.getInt("fieldSizeY", 3));
 	}
 
 	/**
@@ -67,7 +67,7 @@ public class MainActivity extends Activity implements OnClickListener {
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 
-		if (item.getItemId() == R.id.app_beenden)
+		if (item.getItemId() == R.id.app_quit)
 			finish();
 
 		return super.onOptionsItemSelected(item);
@@ -75,17 +75,17 @@ public class MainActivity extends Activity implements OnClickListener {
 
 	public void onClick(View v) {
 
-		PlayerType playerTyp1 = PlayerType
+		PlayerType playerType1 = PlayerType
 				.parse((String) ((Spinner) findViewById(R.id.player_type_1_spinner))
 						.getSelectedItem());
 		PlayerType playerTyp2 = PlayerType
 				.parse((String) ((Spinner) findViewById(R.id.player_type_2_spinner))
 						.getSelectedItem());
 
-		int feldGroesseX = Integer
+		int fieldSizeX = Integer
 				.parseInt((String) ((Spinner) findViewById(R.id.field_size_x))
 						.getSelectedItem());
-		int feldGroesseY = Integer
+		int fieldSizeY = Integer
 				.parseInt((String) ((Spinner) findViewById(R.id.field_size_y))
 						.getSelectedItem());
 
@@ -93,18 +93,16 @@ public class MainActivity extends Activity implements OnClickListener {
 		SharedPreferences settings = getSharedPreferences(GAME_SETTINGS_KEY,
 				MODE_PRIVATE);
 		SharedPreferences.Editor editor = settings.edit();
-		editor.putInt("spielerTyp1",
+		editor.putInt("playerType1",
 				((Spinner) findViewById(R.id.player_type_1_spinner))
 						.getSelectedItemPosition());
-		editor.putInt("spielerTyp2",
+		editor.putInt("playerType2",
 				((Spinner) findViewById(R.id.player_type_2_spinner))
 						.getSelectedItemPosition());
-		editor.putInt("feldGroesseX",
-				((Spinner) findViewById(R.id.field_size_x))
-						.getSelectedItemPosition());
-		editor.putInt("feldGroesseY",
-				((Spinner) findViewById(R.id.field_size_y))
-						.getSelectedItemPosition());
+		editor.putInt("fieldSizeX", ((Spinner) findViewById(R.id.field_size_x))
+				.getSelectedItemPosition());
+		editor.putInt("fieldSizeY", ((Spinner) findViewById(R.id.field_size_y))
+				.getSelectedItemPosition());
 		editor.commit();
 
 		/*
@@ -112,10 +110,10 @@ public class MainActivity extends Activity implements OnClickListener {
 		 * bundles
 		 */
 		Intent intent = new Intent(this, GameActivity.class);
-		intent.putExtra("spielerTyp1", playerTyp1);
-		intent.putExtra("spielerTyp2", playerTyp2);
-		intent.putExtra("feldGroesseX", feldGroesseX);
-		intent.putExtra("feldGroesseY", feldGroesseY);
+		intent.putExtra("playerType1", playerType1);
+		intent.putExtra("playerType2", playerTyp2);
+		intent.putExtra("fieldSizeX", fieldSizeX);
+		intent.putExtra("fieldSizeY", fieldSizeY);
 
 		startActivity(intent);
 	}

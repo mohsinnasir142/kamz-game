@@ -43,26 +43,26 @@ public class GameActivity extends Activity {
 
 		Bundle intentExtras = getIntent().getExtras();
 
-		PlayerType spielerTyp1 = (PlayerType) intentExtras.get("spielerTyp1");
-		PlayerType spielerTyp2 = (PlayerType) intentExtras.get("spielerTyp2");
+		PlayerType playerType1 = (PlayerType) intentExtras.get("playerType1");
+		PlayerType playerType2 = (PlayerType) intentExtras.get("playerType2");
 
-		int feldGroesseX = intentExtras.getInt("feldGroesseX");
-		int feldGroesseY = intentExtras.getInt("feldGroesseY");
+		int fieldSizeX = intentExtras.getInt("fieldSizeX");
+		int fieldSizeY = intentExtras.getInt("fieldSizeY");
 
-		playingField = PlayerField.generate(feldGroesseX, feldGroesseY);
+		playingField = PlayerField.generate(fieldSizeX, fieldSizeY);
 		playingManager = new PlayerManager();
 
-		playingFieldView = (PlayerFieldView) findViewById(R.id.spielfeldView);
+		playingFieldView = (PlayerFieldView) findViewById(R.id.playerfieldview);
 		playingFieldView.init(playingField);
 
 		playingManager.addPlayers(new Player(getResources().getString(
 				R.string.player_1_name), BitmapFactory.decodeResource(
-				getResources(), R.drawable.spieler_symbol_kaese),
-				getResources().getColor(R.color.player_1_color), spielerTyp1));
+				getResources(), R.drawable.player_symol_tick), getResources()
+				.getColor(R.color.player_1_color), playerType1));
 		playingManager.addPlayers(new Player(getResources().getString(
 				R.string.player_2_name), BitmapFactory.decodeResource(
-				getResources(), R.drawable.spieler_symbol_maus), getResources()
-				.getColor(R.color.player_2_color), spielerTyp2));
+				getResources(), R.drawable.player_symol_cross), getResources()
+				.getColor(R.color.player_2_color), playerType2));
 
 		startGameLoop();
 	}
@@ -88,7 +88,7 @@ public class GameActivity extends Activity {
 
 			while (!isGameOver()) {
 
-				final Player spieler = playingManager.getCurrentPlayer();
+				final Player player = playingManager.getCurrentPlayer();
 
 				/*
 				 * Display which player is it and how many points it has
@@ -97,26 +97,26 @@ public class GameActivity extends Activity {
 				mHandler.post(new Runnable() {
 					public void run() {
 
-						ImageView imageView = (ImageView) findViewById(R.id.aktuellerSpielerSymbol);
-						imageView.setImageBitmap(spieler.getSymbol());
+						ImageView imageView = (ImageView) findViewById(R.id.currentPlayrIcon);
+						imageView.setImageBitmap(player.getSymbol());
 
-						TextView textView = (TextView) findViewById(R.id.punkteAnzeige);
+						TextView textView = (TextView) findViewById(R.id.displayScore);
 						textView.setText(String
-								.valueOf(investigatingScore(spieler)));
+								.valueOf(investigatingScore(player)));
 					}
 				});
 
 				Line line = null;
 
-				if (!spieler.isComputerOpponent()) {
+				if (!player.isComputerOpponent()) {
 
 					playingFieldView.resetLastInput();
 
 					/*
-					 * The user now has its input term. Gameloop this
-					 * thread is now waiting. The wait () / notify () from Java
-					 * Technology Edition Note: is used here. As long as no new
-					 * entry was get account  , sleeps this thread now.
+					 * The user now has its input term. Gameloop this thread is
+					 * now waiting. The wait () / notify () from Java Technology
+					 * Edition Note: is used here. As long as no new entry was
+					 * get account , sleeps this thread now.
 					 */
 					while ((line = playingFieldView.getLastInput()) == null) {
 						try {
@@ -126,9 +126,9 @@ public class GameActivity extends Activity {
 						} catch (InterruptedException ignore) {
 							/*
 							 * This case can be ignored. If the thread pl wake
-							 * up again , it is provided that no input
-							 * is Geta ¤ account directly put to sleep again
-							 * surrounded by the while loop.
+							 * up again , it is provided that no input is Geta ¤
+							 * account directly put to sleep again surrounded by
+							 * the while loop.
 							 */
 						}
 					}
@@ -142,7 +142,7 @@ public class GameActivity extends Activity {
 					} catch (InterruptedException ignore) {
 					}
 
-					line = computerGegnerZug(spieler.getPlayerType());
+					line = computerGegnerZug(player.getPlayerType());
 				}
 
 				selectLine(line);
@@ -173,11 +173,11 @@ public class GameActivity extends Activity {
 
 						int pokalBildID = 0;
 						if (gewinner.getName().equals(
-								getResources().getString(
-										R.string.player_1_name)))
-							pokalBildID = R.drawable.pokal_kaese;
+								getResources()
+										.getString(R.string.player_1_name)))
+							pokalBildID = R.drawable.cup_tick;
 						else
-							pokalBildID = R.drawable.pokal_maus;
+							pokalBildID = R.drawable.cup_cross;
 
 						AlertDialog alertDialog = new AlertDialog.Builder(
 								GameActivity.this)
@@ -199,9 +199,8 @@ public class GameActivity extends Activity {
 											}
 										})
 								.setNegativeButton(
-										getResources()
-												.getText(
-														R.string.main_menu),
+										getResources().getText(
+												R.string.main_menu),
 										new DialogInterface.OnClickListener() {
 											public void onClick(
 													DialogInterface dialog,
@@ -228,8 +227,8 @@ public class GameActivity extends Activity {
 		sb.append(getResources().getString(R.string.winner) + ": "
 				+ gewinner.getName() + "\n\n");
 
-		for (Player spieler : playingManager.getSpieler())
-			sb.append(spieler.getName() + ":\t\t" + investigatingScore(spieler)
+		for (Player player : playingManager.getPlayer())
+			sb.append(player.getName() + ":\t\t" + investigatingScore(player)
 					+ "\n");
 
 		return sb.toString();
@@ -247,7 +246,7 @@ public class GameActivity extends Activity {
 		/*
 		 * The easy AI just any line, the average AI fits at least, that is no
 		 * bar weight, the Complete boxes show a cheese train at the opponent k
-		 * Ã  and this might thus gives a point.
+		 * Ã and this might thus gives a point.
 		 */
 		if (spielerTyp == PlayerType.COMPUTER_MEDIUM) {
 
@@ -319,7 +318,7 @@ public class GameActivity extends Activity {
 		Player winner = null;
 		int maxScore = 0;
 
-		for (Player spieler : playingManager.getSpieler()) {
+		for (Player spieler : playingManager.getPlayer()) {
 
 			int score = investigatingScore(spieler);
 
