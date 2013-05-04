@@ -127,7 +127,7 @@ public class PlayerFieldView extends View implements OnTouchListener {
 		if (box == null || box.getOwner() != null)
 			return true;
 
-		Line strich = box.determineLine((int) event.getX(),
+		Line line = box.determineLine((int) event.getX(),
 				(int) event.getY());
 
 		/*
@@ -135,7 +135,7 @@ public class PlayerFieldView extends View implements OnTouchListener {
 		 * cheese stchens taken. Anyway, it is not clear           What line he
 		 * meant. Therefore, the command is aborted.
 		 */
-		if (strich == null)
+		if (line == null)
 			return true;
 
 		/*
@@ -145,7 +145,7 @@ public class PlayerFieldView extends View implements OnTouchListener {
 		 * The Gameloop thread was previously With "wait ()" and this class as a
 		 * semaphore "paused".
 		 */
-		lastInput = strich;
+		lastInput = line;
 		/*
 		 * At this point the user has input his account successfully get. We
 		 * write its input into an intermediate variable that is used to

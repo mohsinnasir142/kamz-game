@@ -1,8 +1,5 @@
 package com.game.kamz.dotsandbox;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
 
 import com.game.kamz.dotsandbox.model.Box;
 import com.game.kamz.dotsandbox.model.Line;
@@ -135,15 +132,15 @@ public class GameActivity extends Activity {
 
 				}
 
-				else {
-
-					try { /* The user should see the input of the computer. */
-						Thread.sleep(500);
-					} catch (InterruptedException ignore) {
-					}
-
-					line = computerGegnerZug(player.getPlayerType());
-				}
+//				else {
+//
+//					try { /* The user should see the input of the computer. */
+//						Thread.sleep(500);
+//					} catch (InterruptedException ignore) {
+//					}
+//
+//				//	line = trainComputerOpponents(player.getPlayerType());
+//				}
 
 				selectLine(line);
 
@@ -234,60 +231,60 @@ public class GameActivity extends Activity {
 		return sb.toString();
 	}
 
-	private Line computerGegnerZug(PlayerType spielerTyp) {
+//	private Line trainComputerOpponents(PlayerType playertype) {
+//
+//		Line line = lastOpenLineForBox();
+//
+//		if (line != null)
+//			return line;
+//
+//		Line randomLine = SelectRandomLine();
+//
+//		/*
+//		 * The easy AI just any line, the average AI fits at least, that is no
+//		 * bar weight, the Complete boxes show a cheese train at the opponent k
+//		 * Ã and this might thus gives a point.
+//		 */
+//		if (playertype == PlayerType.COMPUTER_MEDIUM) {
+//
+//			int loopCounter = 0;
+//
+//			while (randomLine.isSurroundingBoxClose()) {
+//
+//				randomLine = SelectRandomLine();
+//
+//				/*
+//				 * This will be attempted up to 30 times. Could then still not
+//				 * be found, there are either no more or the opponent may
+//				 * sometimes have luck.
+//				 */
+//				if (++loopCounter >= 30)
+//					break;
+//			}
+//		}
+//
+//		return randomLine;
+//	}
 
-		Line strich = lastOpenLineForBox();
+//	// Last hand select open line for box
+//	private Line lastOpenLineForBox() {
+//
+//		for (Box box : playingField.getOpenBoxList())
+//			if (box.getUnselectedLinesList().size() == 1)
+//				return box.getUnselectedLinesList().get(0);
+//
+//		return null;
+//	}
 
-		if (strich != null)
-			return strich;
-
-		Line randomLine = SelectRandomLine();
-
-		/*
-		 * The easy AI just any line, the average AI fits at least, that is no
-		 * bar weight, the Complete boxes show a cheese train at the opponent k
-		 * Ã and this might thus gives a point.
-		 */
-		if (spielerTyp == PlayerType.COMPUTER_MEDIUM) {
-
-			int loopCounter = 0;
-
-			while (randomLine.isSurroundingBoxClose()) {
-
-				randomLine = SelectRandomLine();
-
-				/*
-				 * This will be attempted up to 30 times. Could then still not
-				 * be found, there are either no more or the opponent may
-				 * sometimes have luck.
-				 */
-				if (++loopCounter >= 30)
-					break;
-			}
-		}
-
-		return randomLine;
-	}
-
-	// Last hand select open line for box
-	private Line lastOpenLineForBox() {
-
-		for (Box kaestchen : playingField.getOpenBoxList())
-			if (kaestchen.getUnselectedLinesList().size() == 1)
-				return kaestchen.getUnselectedLinesList().get(0);
-
-		return null;
-	}
-
-	private Line SelectRandomLine() {
-
-		List<Line> StrokesWithoutOwners = new ArrayList<Line>(
-				playingField.getStricheOhneBesitzer());
-		Line randomLine = StrokesWithoutOwners.get(new Random()
-				.nextInt(StrokesWithoutOwners.size()));
-
-		return randomLine;
-	}
+//	private Line SelectRandomLine() {
+//
+//		List<Line> StrokesWithoutOwners = new ArrayList<Line>(
+//				playingField.getStrokesWithoutOwners());
+//		Line randomLine = StrokesWithoutOwners.get(new Random()
+//				.nextInt(StrokesWithoutOwners.size()));
+//
+//		return randomLine;
+//	}
 
 	private void selectLine(Line strich) {
 

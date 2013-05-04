@@ -92,14 +92,14 @@ public class Line {
 	 */
 
 	// It could Surrounding In box Close(if surrounding box is closed)
-	public boolean isSurroundingBoxClose() {
-
-		for (Box box : boxList)
-			if (box.getUnselectedLinesList().size() <= 2)
-				return true;
-
-		return false;
-	}
+//	public boolean isSurroundingBoxClose() {
+//
+//		for (Box box : boxList)
+//			if (box.getUnselectedLinesList().size() <= 2)
+//				return true;
+//
+//		return false;
+//	}
 
 	//   get owner
 	public Player getOwner() {

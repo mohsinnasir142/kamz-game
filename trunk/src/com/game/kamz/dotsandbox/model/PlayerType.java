@@ -44,17 +44,17 @@ public enum PlayerType {
 
 		if (string.equals("Human"))
 			return MAN;
+//
+//		if (string.equals("AI Easy"))
+//			return COMPUTER_EASY;
+//
+//		if (string.equals("AI Medium"))
+//			return COMPUTER_MEDIUM;
+//
+//		if (string.equals("KI Hard"))
+//			return COMPUTER_HARD;
 
-		if (string.equals("AI Easy"))
-			return COMPUTER_EASY;
-
-		if (string.equals("AI Medium"))
-			return COMPUTER_MEDIUM;
-
-		if (string.equals("KI Hard"))
-			return COMPUTER_HARD;
-
-		throw new IllegalArgumentException("Unbekannter SpielerTyp: " + string);
+		throw new IllegalArgumentException("Unknown Player Type: " + string);
 	}
 
 	public boolean iscomputerOpponent() {
