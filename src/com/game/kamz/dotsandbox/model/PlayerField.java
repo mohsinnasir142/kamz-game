@@ -50,11 +50,11 @@ public class PlayerField {
 		return Collections.unmodifiableList(list);
 	}
 
-	public List<Box> getOpenBoxList() {
-		return Collections.unmodifiableList(openBoxesList);
-	}
+//	public List<Box> getOpenBoxList() {
+//		return Collections.unmodifiableList(openBoxesList);
+//	}
 
-	public Set<Line> getStricheOhneBesitzer() {
+	public Set<Line> getStrokesWithoutOwners() {
 		return Collections.unmodifiableSet(strokesWithoutOwners);
 	}
 
@@ -150,19 +150,19 @@ public class PlayerField {
 				if (gridX < numberH - 1)
 					rightBox = playingField.getBox(gridX + 1, gridY);
 
-				Line strichUnten = new Line(box, bottomBox, null, null);
-				Line strichRechts = new Line(null, null, box, rightBox);
+				Line belowLine = new Line(box, bottomBox, null, null);
+				Line rightLine = new Line(null, null, box, rightBox);
 
 				if (rightBox != null) {
-					box.setRightLine(strichRechts);
-					rightBox.setLeftLine(strichRechts);
-					playingField.addLine(strichRechts);
+					box.setRightLine(rightLine);
+					rightBox.setLeftLine(rightLine);
+					playingField.addLine(rightLine);
 				}
 
 				if (bottomBox != null) {
-					box.setBottomLine(strichUnten);
-					bottomBox.setTopLine(strichUnten);
-					playingField.addLine(strichUnten);
+					box.setBottomLine(belowLine);
+					bottomBox.setTopLine(belowLine);
+					playingField.addLine(belowLine);
 				}
 			}
 		}
