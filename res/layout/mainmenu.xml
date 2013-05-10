@@ -108,8 +108,9 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="10dip"
-        android:drawableLeft="@drawable/play"
-        android:drawablePadding="10dip"
-        android:text="@string/play" />
+        android:layout_marginLeft="50dip"
+        android:background="@drawable/play"
+
+         />
 
 </LinearLayout>
