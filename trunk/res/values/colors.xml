@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="background_color">#eeeaab</color>
-    <color name="player_1_color">#50d6d9</color>
+    <color name="background_color">#2989cc</color>
+    <color name="player_1_color">#5ea1a3</color>
     <color name="player_2_color">#F00</color>
 </resources>
