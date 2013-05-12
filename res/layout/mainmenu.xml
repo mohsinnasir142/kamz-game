@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="@color/background_color"
+    android:background="@drawable/myrectangle"
     android:gravity="center_horizontal"
     android:orientation="vertical"
     android:scrollbars="horizontal" >
@@ -14,7 +14,7 @@
         android:layout_marginLeft="5dip"
         android:layout_marginRight="5dip"
         android:layout_marginTop="5dip"
-        android:stretchColumns="1">
+        android:stretchColumns="1" >
 
         <TableRow>
 
@@ -24,7 +24,7 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginBottom="5dip"
                 android:layout_marginTop="2dip"
-                android:src="@drawable/icon_large"/>
+                android:src="@drawable/icon_large" />
 
             <Button
                 android:id="@+id/about"
@@ -53,22 +53,22 @@
 
             <ImageView android:src="@drawable/player_symol_tick" />
 
-            <Spinner
-                android:id="@+id/player_type_1_spinner"
+            <EditText
+                android:id="@+id/player_1_editText"
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="10dip"
-                android:entries="@array/playerTypes" />
+                android:text="Player 1" />
         </TableRow>
 
         <TableRow>
 
             <ImageView android:src="@drawable/player_symol_cross" />
 
-            <Spinner
-                android:id="@+id/player_type_2_spinner"
+            <EditText
+                android:id="@+id/player_2_editText"
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="10dip"
-                android:entries="@array/playerTypes" />
+                android:text="Player 3" />
         </TableRow>
     </TableLayout>
 
@@ -107,10 +107,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="10dip"
         android:layout_marginLeft="50dip"
-        android:background="@drawable/play"
-
-         />
+        android:layout_marginTop="10dip"
+        android:background="@drawable/play" />
 
 </LinearLayout>

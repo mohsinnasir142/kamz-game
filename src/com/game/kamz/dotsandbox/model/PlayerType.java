@@ -32,7 +32,7 @@ public enum PlayerType {
 	MAN, COMPUTER_EASY, COMPUTER_MEDIUM, COMPUTER_HARD;
 
 	/**
-	 * If a Data of type was selected in the spinner, we can only K√ ∂ the
+	 * If a Data of type was selected in the spinner, we can only the
 	 * string Rep. presentation of query. Unfortunately, the spinner does not
 	 * accept enums. Therefore, we must m√ º parse the correct type from the
 	 * string.

@@ -11,6 +11,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Spinner;
 import com.game.kamz.dotsandbox.R;
 
@@ -25,6 +26,7 @@ public class MainActivity extends Activity implements OnClickListener {
 	 * "shared preferences" map under a certain hits. In this case, we save the
 	 * game settings.
 	 */
+
 	public static final String GAME_SETTINGS_KEY = "game_settings";
 
 	@Override
@@ -34,15 +36,19 @@ public class MainActivity extends Activity implements OnClickListener {
 		setContentView(R.layout.mainmenu);
 
 		Button playButton = (Button) findViewById(R.id.play);
+		Button aboutButton = (Button) findViewById(R.id.about);
+		
 		playButton.setOnClickListener(this);
+		aboutButton.setOnClickListener(this);
 
 		/* retrieve the settings to view. */
 		SharedPreferences settings = getSharedPreferences(GAME_SETTINGS_KEY,
 				MODE_PRIVATE);
-		((Spinner) findViewById(R.id.player_type_1_spinner))
-				.setSelection(settings.getInt("playerType1", 0));
-		((Spinner) findViewById(R.id.player_type_2_spinner))
-				.setSelection(settings.getInt("playerType2", 2));
+		((EditText) findViewById(R.id.player_1_editText)).setText(settings
+				.getString("playerType1", "Player 1"));
+
+		((EditText) findViewById(R.id.player_2_editText)).setText(settings
+				.getString("playerType2", "Player 2"));
 		((Spinner) findViewById(R.id.field_size_x)).setSelection(settings
 				.getInt("fieldSizeX", 3));
 		((Spinner) findViewById(R.id.field_size_y)).setSelection(settings
@@ -75,47 +81,55 @@ public class MainActivity extends Activity implements OnClickListener {
 
 	public void onClick(View v) {
 
-		PlayerType playerType1 = PlayerType
-				.parse((String) ((Spinner) findViewById(R.id.player_type_1_spinner))
-						.getSelectedItem());
-		PlayerType playerTyp2 = PlayerType
-				.parse((String) ((Spinner) findViewById(R.id.player_type_2_spinner))
-						.getSelectedItem());
+		switch (v.getId()) {
 
-		int fieldSizeX = Integer
-				.parseInt((String) ((Spinner) findViewById(R.id.field_size_x))
-						.getSelectedItem());
-		int fieldSizeY = Integer
-				.parseInt((String) ((Spinner) findViewById(R.id.field_size_y))
-						.getSelectedItem());
+		case R.id.play:
 
-		/* store values in settings using shared preferences */
-		SharedPreferences settings = getSharedPreferences(GAME_SETTINGS_KEY,
-				MODE_PRIVATE);
-		SharedPreferences.Editor editor = settings.edit();
-		editor.putInt("playerType1",
-				((Spinner) findViewById(R.id.player_type_1_spinner))
-						.getSelectedItemPosition());
-		editor.putInt("playerType2",
-				((Spinner) findViewById(R.id.player_type_2_spinner))
-						.getSelectedItemPosition());
-		editor.putInt("fieldSizeX", ((Spinner) findViewById(R.id.field_size_x))
-				.getSelectedItemPosition());
-		editor.putInt("fieldSizeY", ((Spinner) findViewById(R.id.field_size_y))
-				.getSelectedItemPosition());
-		editor.commit();
+			PlayerType playerType1 = PlayerType.parse("Human");
+			PlayerType playerType2 = PlayerType.parse("Human");
 
-		/*
-		 * put data into intenet.Actually data is send by using intent and
-		 * bundles
-		 */
-		Intent intent = new Intent(this, GameActivity.class);
-		intent.putExtra("playerType1", playerType1);
-		intent.putExtra("playerType2", playerTyp2);
-		intent.putExtra("fieldSizeX", fieldSizeX);
-		intent.putExtra("fieldSizeY", fieldSizeY);
+			int fieldSizeX = Integer
+					.parseInt((String) ((Spinner) findViewById(R.id.field_size_x))
+							.getSelectedItem());
+			int fieldSizeY = Integer
+					.parseInt((String) ((Spinner) findViewById(R.id.field_size_y))
+							.getSelectedItem());
 
-		startActivity(intent);
+			/* store values in settings using shared preferences */
+			SharedPreferences settings = getSharedPreferences(
+					GAME_SETTINGS_KEY, MODE_PRIVATE);
+			SharedPreferences.Editor editor = settings.edit();
+			editor.putString("playerType1",
+					((EditText) findViewById(R.id.player_1_editText)).getText()
+							.toString());
+			editor.putString("playerType2",
+					((EditText) findViewById(R.id.player_2_editText)).getText()
+							.toString());
+			editor.putInt("fieldSizeX",
+					((Spinner) findViewById(R.id.field_size_x))
+							.getSelectedItemPosition());
+			editor.putInt("fieldSizeY",
+					((Spinner) findViewById(R.id.field_size_y))
+							.getSelectedItemPosition());
+			editor.commit();
+
+			/*
+			 * put data into intenet.Actually data is send by using intent and
+			 * bundles
+			 */
+			Intent intent = new Intent(this, GameActivity.class);
+			intent.putExtra("playerType1", playerType1);
+			intent.putExtra("playerType2", playerType2);
+			intent.putExtra("fieldSizeX", fieldSizeX);
+			intent.putExtra("fieldSizeY", fieldSizeY);
+
+			startActivity(intent);
+
+			break;
+
+		case R.id.about:
+			Intent opentAbout = new Intent(this, About.class);
+			startActivity(opentAbout);
+		}
 	}
-
 }

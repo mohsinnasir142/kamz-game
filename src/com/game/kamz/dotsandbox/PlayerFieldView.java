@@ -78,6 +78,7 @@ public class PlayerFieldView extends View implements OnTouchListener {
 	protected void onDraw(Canvas canvas) {
 
 		canvas.drawColor(getResources().getColor(R.color.background_color));
+		
 
 		/**
 		 * Has not yet initialized the field, not draw this. Otherwise, the'd

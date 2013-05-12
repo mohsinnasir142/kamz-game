@@ -4,9 +4,10 @@
     android:versionCode="7"
     android:versionName="0.5" >
 
-    <!-- Provide support for all display sizes. Only from API version 4 
-    for example The HTC Wildfire supports. On this the game should run well.
-     -->
+    <!--
+    Provide support for all display sizes. Only from API version 4 
+    for example The HTC Wildfire supports. On this the game should run well.
+    -->
     <uses-sdk
         android:minSdkVersion="3"
         android:targetSdkVersion="4" />
@@ -29,6 +30,14 @@
             android:name="com.game.kamz.dotsandbox.GameActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait" />
+        <activity
+            android:name="com.game.kamz.dotsandbox.About"
+            android:label="@string/title_activity_about" >
+        </activity>
+        <activity
+            android:name="com.game.kamz.dotsandbox.GameSummary"
+            android:label="@string/title_activity_game_summary" >
+        </activity>
     </application>
 
 </manifest>
