@@ -216,7 +216,7 @@ public class Box {
 	 */
 	public Line determineLine(int pixelX, int pixelY) {
 
-		if (getRectTopLine() != null
+		if (getRectTopLine() != null 
 				&& getRectTopLine().contains(pixelX, pixelY))
 			return topLine;
 
