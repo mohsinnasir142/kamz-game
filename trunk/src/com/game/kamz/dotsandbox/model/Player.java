@@ -21,7 +21,15 @@ public class Player {
 		this.color = color;
 		this.playerType = playerType;
 	}
-
+	public Player(){
+		
+		
+	}
+	public void setName(String name){
+		
+		this.name=name;
+	}
+	
 	public String getName() {
 		return name;
 	}

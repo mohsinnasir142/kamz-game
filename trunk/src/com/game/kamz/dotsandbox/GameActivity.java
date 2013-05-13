@@ -1,5 +1,6 @@
 package com.game.kamz.dotsandbox;
 
+import java.util.Currency;
 
 import com.game.kamz.dotsandbox.model.Box;
 import com.game.kamz.dotsandbox.model.Line;
@@ -11,9 +12,13 @@ import com.game.kamz.dotsandbox.model.PlayerType;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import com.game.kamz.dotsandbox.R;
@@ -21,7 +26,7 @@ import com.game.kamz.dotsandbox.R;
 /**
  * The main activity that manages the game and controls the Gameloop.
  */
-public class GameActivity extends Activity {
+public class GameActivity extends Activity implements OnClickListener {
 
 	private PlayerFieldView playingFieldView;
 	private PlayerField playingField;
@@ -37,6 +42,8 @@ public class GameActivity extends Activity {
 		super.onCreate(savedInstanceState);
 
 		setContentView(R.layout.playingscreen);
+		Button mybtn = (Button) findViewById(R.id.game_summary);
+		mybtn.setOnClickListener(this);
 
 		Bundle intentExtras = getIntent().getExtras();
 
@@ -45,7 +52,6 @@ public class GameActivity extends Activity {
 
 		int fieldSizeX = intentExtras.getInt("fieldSizeX");
 		int fieldSizeY = intentExtras.getInt("fieldSizeY");
-
 		playingField = PlayerField.generate(fieldSizeX, fieldSizeY);
 		playingManager = new PlayerManager();
 
@@ -132,15 +138,15 @@ public class GameActivity extends Activity {
 
 				}
 
-//				else {
-//
-//					try { /* The user should see the input of the computer. */
-//						Thread.sleep(500);
-//					} catch (InterruptedException ignore) {
-//					}
-//
-//				//	line = trainComputerOpponents(player.getPlayerType());
-//				}
+				// else {
+				//
+				// try { /* The user should see the input of the computer. */
+				// Thread.sleep(500);
+				// } catch (InterruptedException ignore) {
+				// }
+				//
+				// // line = trainComputerOpponents(player.getPlayerType());
+				// }
 
 				selectLine(line);
 
@@ -231,69 +237,69 @@ public class GameActivity extends Activity {
 		return sb.toString();
 	}
 
-//	private Line trainComputerOpponents(PlayerType playertype) {
-//
-//		Line line = lastOpenLineForBox();
-//
-//		if (line != null)
-//			return line;
-//
-//		Line randomLine = SelectRandomLine();
-//
-//		/*
-//		 * The easy AI just any line, the average AI fits at least, that is no
-//		 * bar weight, the Complete boxes show a cheese train at the opponent k
-//		 * Ã and this might thus gives a point.
-//		 */
-//		if (playertype == PlayerType.COMPUTER_MEDIUM) {
-//
-//			int loopCounter = 0;
-//
-//			while (randomLine.isSurroundingBoxClose()) {
-//
-//				randomLine = SelectRandomLine();
-//
-//				/*
-//				 * This will be attempted up to 30 times. Could then still not
-//				 * be found, there are either no more or the opponent may
-//				 * sometimes have luck.
-//				 */
-//				if (++loopCounter >= 30)
-//					break;
-//			}
-//		}
-//
-//		return randomLine;
-//	}
+	// private Line trainComputerOpponents(PlayerType playertype) {
+	//
+	// Line line = lastOpenLineForBox();
+	//
+	// if (line != null)
+	// return line;
+	//
+	// Line randomLine = SelectRandomLine();
+	//
+	// /*
+	// * The easy AI just any line, the average AI fits at least, that is no
+	// * bar weight, the Complete boxes show a cheese train at the opponent k
+	// * Ã and this might thus gives a point.
+	// */
+	// if (playertype == PlayerType.COMPUTER_MEDIUM) {
+	//
+	// int loopCounter = 0;
+	//
+	// while (randomLine.isSurroundingBoxClose()) {
+	//
+	// randomLine = SelectRandomLine();
+	//
+	// /*
+	// * This will be attempted up to 30 times. Could then still not
+	// * be found, there are either no more or the opponent may
+	// * sometimes have luck.
+	// */
+	// if (++loopCounter >= 30)
+	// break;
+	// }
+	// }
+	//
+	// return randomLine;
+	// }
 
-//	// Last hand select open line for box
-//	private Line lastOpenLineForBox() {
-//
-//		for (Box box : playingField.getOpenBoxList())
-//			if (box.getUnselectedLinesList().size() == 1)
-//				return box.getUnselectedLinesList().get(0);
-//
-//		return null;
-//	}
+	// // Last hand select open line for box
+	// private Line lastOpenLineForBox() {
+	//
+	// for (Box box : playingField.getOpenBoxList())
+	// if (box.getUnselectedLinesList().size() == 1)
+	// return box.getUnselectedLinesList().get(0);
+	//
+	// return null;
+	// }
 
-//	private Line SelectRandomLine() {
-//
-//		List<Line> StrokesWithoutOwners = new ArrayList<Line>(
-//				playingField.getStrokesWithoutOwners());
-//		Line randomLine = StrokesWithoutOwners.get(new Random()
-//				.nextInt(StrokesWithoutOwners.size()));
-//
-//		return randomLine;
-//	}
+	// private Line SelectRandomLine() {
+	//
+	// List<Line> StrokesWithoutOwners = new ArrayList<Line>(
+	// playingField.getStrokesWithoutOwners());
+	// Line randomLine = StrokesWithoutOwners.get(new Random()
+	// .nextInt(StrokesWithoutOwners.size()));
+	//
+	// return randomLine;
+	// }
 
-	private void selectLine(Line strich) {
+	private void selectLine(Line line) {
 
-		if (strich.getOwner() != null)
+		if (line.getOwner() != null)
 			return;
 
 		Player currentPlayer = playingManager.getCurrentPlayer();
 
-		boolean isBoxBecomeComplete = playingField.optForLine(strich,
+		boolean isBoxBecomeComplete = playingField.optForLine(line,
 				currentPlayer);
 
 		/*
@@ -315,12 +321,12 @@ public class GameActivity extends Activity {
 		Player winner = null;
 		int maxScore = 0;
 
-		for (Player spieler : playingManager.getPlayer()) {
+		for (Player player : playingManager.getPlayer()) {
 
-			int score = investigatingScore(spieler);
+			int score = investigatingScore(player);
 
 			if (score > maxScore) {
-				winner = spieler;
+				winner = player;
 				maxScore = score;
 			}
 		}
@@ -337,6 +343,12 @@ public class GameActivity extends Activity {
 				dots++;
 
 		return dots;
+	}
+
+	public void onClick(View v) {
+
+		Intent openSummary = new Intent(this, GameSummary.class);
+		startActivity(openSummary);
 	}
 
 }
