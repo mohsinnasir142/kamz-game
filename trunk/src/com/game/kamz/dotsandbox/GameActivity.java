@@ -1,7 +1,5 @@
 package com.game.kamz.dotsandbox;
 
-import java.util.Currency;
-
 import com.game.kamz.dotsandbox.model.Box;
 import com.game.kamz.dotsandbox.model.Line;
 import com.game.kamz.dotsandbox.model.Player;

@@ -6,7 +6,7 @@
 
     <!--
     Provide support for all display sizes. Only from API version 4 
-    for example The HTC Wildfire supports. On this the game should run well.
+    for example The HTC Wildfire supports. On this the game should run well.
     -->
     <uses-sdk
         android:minSdkVersion="3"

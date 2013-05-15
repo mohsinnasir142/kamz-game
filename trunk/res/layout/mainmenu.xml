@@ -7,6 +7,8 @@
     android:orientation="vertical"
     android:scrollbars="horizontal" >
 
+    <include layout="@layout/ad" />
+
     <TableLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="fill_parent"
@@ -102,13 +104,33 @@
             android:entries="@array/fieldDimension" />
     </LinearLayout>
 
-    <Button
-        android:id="@+id/play"
-        android:layout_width="wrap_content"
+    <TableLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginLeft="50dip"
-        android:layout_marginTop="10dip"
-        android:background="@drawable/play" />
+        android:layout_marginLeft="10dip"
+        android:layout_marginRight="5dip"
+        android:layout_marginTop="5dip"
+        android:stretchColumns="2" >
+ 
+        <TableRow>
+
+            <Button
+                android:id="@+id/play2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:background="@drawable/saved" />
+
+            <Button
+                android:id="@+id/play"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="50dp"
+                android:layout_gravity="center_horizontal"
+
+                android:background="@drawable/play" />
+        </TableRow>
+    </TableLayout>
 
 </LinearLayout>
