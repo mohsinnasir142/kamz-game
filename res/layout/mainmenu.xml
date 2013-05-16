@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+     xmlns:ads="http://schemas.android.com/apk/lib/com.google.ads"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:background="@drawable/myrectangle"
@@ -7,7 +8,14 @@
     android:orientation="vertical"
     android:scrollbars="horizontal" >
 
-    <include layout="@layout/ad" />
+
+      <com.google.ads.AdView
+            android:id="@+id/adView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            ads:adSize="BANNER"
+            ads:adUnitId="a1518c693497acc"
+            ads:loadAdsOnCreate="true" />
 
     <TableLayout
         xmlns:android="http://schemas.android.com/apk/res/android"

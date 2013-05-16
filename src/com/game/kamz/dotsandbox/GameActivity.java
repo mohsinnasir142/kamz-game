@@ -1,5 +1,9 @@
 package com.game.kamz.dotsandbox;
 
+import java.security.PublicKey;
+
+import javax.xml.datatype.Duration;
+
 import com.game.kamz.dotsandbox.model.Box;
 import com.game.kamz.dotsandbox.model.Line;
 import com.game.kamz.dotsandbox.model.Player;
@@ -11,6 +15,8 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.Handler;
@@ -19,7 +25,12 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import com.game.kamz.dotsandbox.R;
+import com.google.ads.AdRequest;
+import com.google.ads.AdView;
+import com.google.ads.internal.AdVideoView;
 
 /**
  * The main activity that manages the game and controls the Gameloop.
@@ -29,7 +40,18 @@ public class GameActivity extends Activity implements OnClickListener {
 	private PlayerFieldView playingFieldView;
 	private PlayerField playingField;
 	private PlayerManager playingManager;
+	int Player1Winner=0;
+	int Player2Winner=0;
+	
+	
+	SharedPreferences playerPref;
+	public final String filename="player1File";
+	
+	
+	SharedPreferences player2Pref;
+	public final String filename2="player2File";
 
+	
 	private final Handler mHandler = new Handler();
 
 	/** This variable controls the game loop thread. */
@@ -42,7 +64,8 @@ public class GameActivity extends Activity implements OnClickListener {
 		setContentView(R.layout.playingscreen);
 		Button mybtn = (Button) findViewById(R.id.game_summary);
 		mybtn.setOnClickListener(this);
-
+		AdView ad=(AdView) findViewById(R.id.adViews);
+		ad.loadAd(new AdRequest());
 		Bundle intentExtras = getIntent().getExtras();
 
 		PlayerType playerType1 = (PlayerType) intentExtras.get("playerType1");
@@ -168,7 +191,7 @@ public class GameActivity extends Activity implements OnClickListener {
 
 					public void run() {
 
-						Player gewinner = investigatingWinner();
+					 final	Player gewinner = investigatingWinner();
 
 						/* FIXME DISPLAY TROPHY IMAGE */
 
@@ -195,8 +218,50 @@ public class GameActivity extends Activity implements OnClickListener {
 										new DialogInterface.OnClickListener() {
 											public void onClick(
 													DialogInterface dialog,
-													int id) {
-												startActivity(getIntent());
+													int id) 
+											{
+							// ______________________________start Play again event_________________________________//
+												
+												if (gewinner.getName().equals(
+														getResources()
+																.getString(R.string.player_1_name)))
+												{
+													// first get the preferendes and set the value in player1Winner
+													playerPref=getSharedPreferences(filename, 0);
+													
+													Player1Winner=playerPref.getInt("player1", 0);
+													// increment the value of player1Winner and save this value in shared preferences
+													Player1Winner++;
+													
+													SharedPreferences.Editor player1Editor=playerPref.edit();
+													player1Editor.putInt("player1", Player1Winner);
+													player1Editor.commit();
+													
+													
+													
+													startActivity(getIntent());
+													
+												}
+												else {
+
+													// first get the preferences and set the value in player1Winner
+													player2Pref=getSharedPreferences(filename2, 0);
+													
+													Player2Winner=player2Pref.getInt("player2", 0);
+													// increment the value of player1Winner and save this value in shared preferences
+													Player2Winner++;
+													
+													SharedPreferences.Editor player2Editor=player2Pref.edit();
+													player2Editor.putInt("player2", Player2Winner);
+													player2Editor.commit();
+													startActivity(getIntent());
+												
+												}									
+												
+											
+											
+							// ______________________________end Play again event_________________________________//
+											
 											}
 										})
 								.setNegativeButton(
@@ -208,6 +273,16 @@ public class GameActivity extends Activity implements OnClickListener {
 													int id) {
 												dialog.dismiss();
 												GameActivity.this.finish();
+												
+												playerPref=getSharedPreferences(filename, 0);
+												SharedPreferences.Editor player1Editor=playerPref.edit();
+												player1Editor.putInt("player1", 0);
+												player1Editor.commit();
+												
+												player2Pref=getSharedPreferences(filename2, 0);
+												SharedPreferences.Editor player2Editor=player2Pref.edit();
+												player2Editor.putInt("player2", 0);
+												player2Editor.commit();
 											}
 										}).create();
 
@@ -344,9 +419,13 @@ public class GameActivity extends Activity implements OnClickListener {
 	}
 
 	public void onClick(View v) {
-
-		Intent openSummary = new Intent(this, GameSummary.class);
-		startActivity(openSummary);
+switch (v.getId()) {
+case R.id.game_summary:
+	Intent openSummary = new Intent(getApplicationContext(), GameSummary.class);
+	startActivity(openSummary);
+	break;
+}
+		
 	}
 
 }

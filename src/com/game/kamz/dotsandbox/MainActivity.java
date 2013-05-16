@@ -14,6 +14,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import com.game.kamz.dotsandbox.R;
+import com.google.ads.AdRequest;
+import com.google.ads.AdView;
 
 /**
  * This activity appears when you start the app. Here is Selected who are the
@@ -28,12 +30,32 @@ public class MainActivity extends Activity implements OnClickListener {
 	 */
 
 	public static final String GAME_SETTINGS_KEY = "game_settings";
-
+	public final String filename="player1File";
+	public final String filename2="player2File";
+	
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
 		setContentView(R.layout.mainmenu);
+		AdView ad=(AdView)findViewById(R.id.adView);
+		ad.loadAd(new AdRequest());
+		
+		//empty the sharepreferences of Summary
+		
+		SharedPreferences playerPref = getSharedPreferences(filename, 0);
+		SharedPreferences.Editor player1Editor=playerPref.edit();
+		player1Editor.putInt("player1", 0);
+		player1Editor.commit();
+		
+		SharedPreferences player2Pref = getSharedPreferences(filename2, 0);
+		SharedPreferences.Editor player2Editor=player2Pref.edit();
+		player2Editor.putInt("player2", 0);
+		player2Editor.commit();
+		
+		
+		
 
 		Button playButton = (Button) findViewById(R.id.play);
 		Button aboutButton = (Button) findViewById(R.id.about);
@@ -124,6 +146,21 @@ public class MainActivity extends Activity implements OnClickListener {
 			intent.putExtra("fieldSizeY", fieldSizeY);
 
 			startActivity(intent);
+			
+			
+			
+			//empty the sharepreferences of Summary
+			
+			SharedPreferences playerPref = getSharedPreferences(filename, 0);
+			SharedPreferences.Editor player1Editor=playerPref.edit();
+			player1Editor.putInt("player1", 0);
+			player1Editor.commit();
+			
+			SharedPreferences player2Pref = getSharedPreferences(filename2, 0);
+			SharedPreferences.Editor player2Editor=player2Pref.edit();
+			player2Editor.putInt("player2", 0);
+			player2Editor.commit();
+			
 
 			break;
 
