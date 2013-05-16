@@ -1,11 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+     xmlns:ads="http://schemas.android.com/apk/lib/com.google.ads"
+      android:layout_width="fill_parent"
     android:layout_height="wrap_content" >
 
     <TableRow>
-
-        <TextView android:text="the ad will go here . . . . . ." />
+   <com.google.ads.AdView
+            android:id="@+id/adView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            ads:adSize="BANNER"
+            ads:adUnitId="a1518c693497acc"
+            ads:loadAdsOnCreate="true" />
+        
     </TableRow>
 
     <TableRow android:layout_width="fill_parent" >

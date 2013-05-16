@@ -11,6 +11,8 @@
     <uses-sdk
         android:minSdkVersion="3"
         android:targetSdkVersion="4" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
         android:allowClearUserData="true"
@@ -32,12 +34,17 @@
             android:screenOrientation="portrait" />
         <activity
             android:name="com.game.kamz.dotsandbox.About"
-            android:label="@string/title_activity_about" >
+            android:label="@string/title_activity_about" android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name="com.game.kamz.dotsandbox.GameSummary"
-            android:label="@string/title_activity_game_summary" >
+            android:label="@string/title_activity_game_summary" android:screenOrientation="portrait" >
         </activity>
+         <activity android:name="com.google.ads.AdActivity"
+                  android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"></activity>
+     <activity android:name="com.game.kamz.dotsandbox.AdsTry" ></activity>
+    
+        
     </application>
 
 </manifest>

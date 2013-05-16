@@ -9,6 +9,7 @@
 
     <!-- -android:background="@color/background_color" -->
 
+    
     <include layout="@layout/ad" />
 
     <ImageView
@@ -51,10 +52,20 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="1dp"
                 android:background="@drawable/myrectangle"
+                android:text="Status"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="#000" />
+            
+            
+            <TextView
+                android:id="@+id/textView1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="1dp"
+                android:background="@drawable/myrectangle"
                 android:text="PLAYER 1"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:textColor="#000" >
-            </TextView>
+                android:textColor="#000" />
 
             <TextView
                 android:id="@+id/textView1"
@@ -75,7 +86,19 @@
             android:gravity="center" >
 
             <TextView
-                android:id="@+id/textView1"
+              android:id="@+id/textView123"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="1dp"
+                android:background="@drawable/myrectangle"
+                android:text="Won"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="#000">
+            </TextView>
+            
+            
+            <TextView
+                android:id="@+id/player1WinTv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/cell_shape"
@@ -86,7 +109,7 @@
             </TextView>
 
             <TextView
-                android:id="@+id/textView1"
+                android:id="@+id/player2WinTv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/cell_shape"
@@ -95,6 +118,8 @@
                 android:text="8"
                 android:textAppearance="?android:attr/textAppearanceMedium" >
             </TextView>
+                        
+              
         </TableRow>
 
         <TableRow
@@ -103,8 +128,23 @@
             android:layout_height="wrap_content"
             android:gravity="center" >
 
+            
             <TextView
-                android:id="@+id/textView1"
+              android:id="@+id/textView12"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="1dp"
+                android:background="@drawable/myrectangle"
+                android:text="Lost"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="#000">
+            </TextView>
+            
+            
+            
+            
+            <TextView
+                android:id="@+id/player1LoseTv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/cell_shape"
@@ -115,7 +155,7 @@
             </TextView>
 
             <TextView
-                android:id="@+id/textView1"
+                android:id="@+id/player2LoseTv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/cell_shape"
