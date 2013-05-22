@@ -18,18 +18,15 @@ import com.game.kamz.dotsandbox.R;
  * This class features the playing field and takes user interactions   *
  * Counter. 
  */
-public class PlayerFieldView extends View implements OnTouchListener {
+public  class PlayerFieldView extends View implements OnTouchListener {
 
 	public static int BOX_PAGE_LENGHT = 50;
 	public static int PADDING = 5;
 
 	private PlayerField PlayingField;
 
-	/**
-	 * About the last entry is brought to experience what the user        made.
-	 * The retrieval of this value is blocking it were in the game-flow.
-	 */
-	private volatile Line lastInput;
+	
+	private  volatile Line lastInput;
 
 	/**
 	 * About the last entry is brought to experience what the users. The
@@ -45,7 +42,7 @@ public class PlayerFieldView extends View implements OnTouchListener {
 		setOnTouchListener(this);
 	}
 
-	public Line getLastInput() {
+	public  Line getLastInput() {
 
 		return lastInput;
 	}
@@ -90,11 +87,7 @@ public class PlayerFieldView extends View implements OnTouchListener {
 			return;
 		}
 
-		/**
-		 * If the field is not initialized, do not draw this. Otherwise this
-		 * lead to a null pointer exception for. This is account to be
-		 * represented correctly in the GUI editor.
-		 */
+		
 
 		for (Box box : PlayingField.getListBox()) {
 			box.onDraw(canvas);
