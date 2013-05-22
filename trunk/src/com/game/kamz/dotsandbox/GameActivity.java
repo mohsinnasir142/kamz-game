@@ -1,9 +1,5 @@
 package com.game.kamz.dotsandbox;
 
-import java.security.PublicKey;
-
-import javax.xml.datatype.Duration;
-
 import com.game.kamz.dotsandbox.model.Box;
 import com.game.kamz.dotsandbox.model.Line;
 import com.game.kamz.dotsandbox.model.Player;
@@ -54,7 +50,8 @@ public class GameActivity extends Activity implements OnClickListener {
 	
 	private final Handler mHandler = new Handler();
 
-	/** This variable controls the game loop thread. */
+	/** This variable controls the game loop thread
+	 * . */
 	private volatile boolean running = true;
 
 	@Override
@@ -93,7 +90,7 @@ public class GameActivity extends Activity implements OnClickListener {
 
 	@Override
 	protected void onStop() {
-		running = false;
+		running = true;
 		super.onStop();
 	}
 

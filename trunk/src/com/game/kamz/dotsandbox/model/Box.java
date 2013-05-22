@@ -35,9 +35,9 @@ import android.graphics.Paint;
 import android.graphics.Rect;
 
 /**
- * Ein Kästchen auf dem Spielfeld.
  * 
- * @author Stefan Oltmann
+ * 
+ * @author Mohsin Nasir
  */
 public class Box {
 
@@ -54,7 +54,7 @@ public class Box {
 	 */
 	private Player owner;
 
-	/* Bars of cheese pricking*/
+	/* Bars of tick pricking*/
 	private Line topLine;
 	private Line bottomLine;
 	private Line leftLine;
@@ -63,7 +63,7 @@ public class Box {
 	private Paint framePaint = new Paint();
 
 	/**
-	 * Constructor to create the cheese stand. You must specify the position / *
+	 * Constructor to create the tich stand. You must specify the position / *
 	 * ID of the box to clear it.
 	 */
 	public Box(int gridX, int gridY) {
