@@ -6,14 +6,13 @@ import com.game.kamz.dotsandbox.model.Player;
 import com.game.kamz.dotsandbox.model.PlayerField;
 import com.game.kamz.dotsandbox.model.PlayerManager;
 import com.game.kamz.dotsandbox.model.PlayerType;
-
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.SharedPreferences.Editor;
 import android.graphics.BitmapFactory;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
@@ -21,12 +20,9 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
-
 import com.game.kamz.dotsandbox.R;
 import com.google.ads.AdRequest;
 import com.google.ads.AdView;
-import com.google.ads.internal.AdVideoView;
 
 /**
  * The main activity that manages the game and controls the Gameloop.
@@ -282,7 +278,8 @@ public class GameActivity extends Activity implements OnClickListener {
 												player2Editor.commit();
 											}
 										}).create();
-
+						MediaPlayer md=MediaPlayer.create(getApplicationContext(), R.raw.notify);
+						md.start();
 						alertDialog.show();
 					}
 				});
@@ -420,6 +417,7 @@ switch (v.getId()) {
 case R.id.game_summary:
 	Intent openSummary = new Intent(getApplicationContext(), GameSummary.class);
 	startActivity(openSummary);
+	PlayerFieldView.check=true;
 	break;
 }
 		
