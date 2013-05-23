@@ -4,9 +4,12 @@ import com.game.kamz.dotsandbox.model.Box;
 import com.game.kamz.dotsandbox.model.Line;
 import com.game.kamz.dotsandbox.model.PlayerField;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;
+import android.media.MediaPlayer;
+import android.media.SoundPool;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
@@ -27,6 +30,9 @@ public  class PlayerFieldView extends View implements OnTouchListener {
 
 	
 	private  volatile Line lastInput;
+	//for sound
+ public	static Boolean  check=true;
+ MediaPlayer mp;
 
 	/**
 	 * About the last entry is brought to experience what the users. The
@@ -38,12 +44,15 @@ public  class PlayerFieldView extends View implements OnTouchListener {
 	}
 
 	public void init(PlayerField PlayingField) {
+		//for Sound
+		check=true;
 		this.PlayingField = PlayingField;
 		setOnTouchListener(this);
 	}
 
 	public  Line getLastInput() {
 
+		
 		return lastInput;
 	}
 
@@ -71,12 +80,31 @@ public  class PlayerFieldView extends View implements OnTouchListener {
 		BOX_PAGE_LENGHT = Math.min(maxWidth, maxHeight);
 	}
 
+	
 	@Override
 	protected void onDraw(Canvas canvas) {
-
 		canvas.drawColor(getResources().getColor(R.color.background_color));
+		//for sound
 		
-
+		if(check==true){
+			check=false;
+		}
+			
+		else if (check==false){
+		
+		
+		//action for sound onclick 
+		
+		
+		mp=MediaPlayer.create(getContext(), R.raw.popup);
+		mp.start();
+		
+		}
+//		Dialog d=new Dialog(getContext());
+//		d.setTitle("::");
+//		d.show();
+		
+		
 		/**
 		 * Has not yet initialized the field, not draw this. Otherwise, the'd
 		 * lead to a null pointer exception for. This is Required account also
@@ -96,6 +124,8 @@ public  class PlayerFieldView extends View implements OnTouchListener {
 
 	public boolean onTouch(View view, MotionEvent event) {
 
+		
+		
 		/**
 		 * There are different motion events, but here we are interested only
 		 * The actual fact 1/4 on the screen.
@@ -155,6 +185,7 @@ public  class PlayerFieldView extends View implements OnTouchListener {
 	}
 
 	public void updateDisplay() {
+		
 		postInvalidate(); // View force to redraw
 	}
 

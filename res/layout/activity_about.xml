@@ -67,6 +67,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="left"
-        android:text="Mohsin\nMohsin\nAli" />
+        android:text="Mohsin Mehdi\nMohsin Nasir\nAli Raza" />
 
 </LinearLayout>
