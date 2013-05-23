@@ -265,7 +265,8 @@ public class GameActivity extends Activity implements OnClickListener {
 													DialogInterface dialog,
 													int id) {
 												dialog.dismiss();
-												GameActivity.this.finish();
+												Intent intent=new Intent(getApplicationContext(), MainActivity.class);
+												startActivity(intent);
 												
 												playerPref=getSharedPreferences(filename, 0);
 												SharedPreferences.Editor player1Editor=playerPref.edit();
