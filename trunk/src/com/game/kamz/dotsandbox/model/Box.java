@@ -54,7 +54,7 @@ public class Box {
 	 */
 	private Player owner;
 
-	/* Bars of tick pricking*/
+	/* Bars of tick picking*/
 	private Line topLine;
 	private Line bottomLine;
 	private Line leftLine;
@@ -212,7 +212,7 @@ public class Box {
 	}
 
 	/**
-	 * This method determines which line of cheese bites in sequence
+	 * This method determines which line of to be chosen in sequence
 	 */
 	public Line determineLine(int pixelX, int pixelY) {
 

@@ -32,22 +32,23 @@ public class GameActivity extends Activity implements OnClickListener {
 	private PlayerFieldView playingFieldView;
 	private PlayerField playingField;
 	private PlayerManager playingManager;
-	int Player1Winner=0;
-	int Player2Winner=0;
-	
-	
+	int Player1Winner = 0;
+	int Player2Winner = 0;
+	public static final String GAME_SETTINGS_KEY = "game_settings";
+	SharedPreferences settings;
 	SharedPreferences playerPref;
-	public final String filename="player1File";
-	
-	
-	SharedPreferences player2Pref;
-	public final String filename2="player2File";
+	public final String filename1 = "player1File";
 
-	
+	TextView player1Score, player2Score;
+
+	SharedPreferences player2Pref;
+	public final String filename2 = "player2File";
+
 	private final Handler mHandler = new Handler();
 
-	/** This variable controls the game loop thread
-	 * . */
+	/**
+	 * This variable controls the game loop thread .
+	 */
 	private volatile boolean running = true;
 
 	@Override
@@ -57,7 +58,7 @@ public class GameActivity extends Activity implements OnClickListener {
 		setContentView(R.layout.playingscreen);
 		Button mybtn = (Button) findViewById(R.id.game_summary);
 		mybtn.setOnClickListener(this);
-		AdView ad=(AdView) findViewById(R.id.adViews);
+		AdView ad = (AdView) findViewById(R.id.adViews);
 		ad.loadAd(new AdRequest());
 		Bundle intentExtras = getIntent().getExtras();
 
@@ -72,14 +73,28 @@ public class GameActivity extends Activity implements OnClickListener {
 		playingFieldView = (PlayerFieldView) findViewById(R.id.playerfieldview);
 		playingFieldView.init(playingField);
 
-		playingManager.addPlayers(new Player(getResources().getString(
-				R.string.player_1_name), BitmapFactory.decodeResource(
-				getResources(), R.drawable.player_symol_tick), getResources()
-				.getColor(R.color.player_1_color), playerType1));
-		playingManager.addPlayers(new Player(getResources().getString(
-				R.string.player_2_name), BitmapFactory.decodeResource(
-				getResources(), R.drawable.player_symol_cross), getResources()
-				.getColor(R.color.player_2_color), playerType2));
+		settings = getSharedPreferences(GAME_SETTINGS_KEY, MODE_PRIVATE);
+
+		playingManager.addPlayers(new Player(settings.getString("playerType1",
+				"Player 1"), BitmapFactory.decodeResource(getResources(),
+				R.drawable.player_symol_tick), getResources().getColor(
+				R.color.player_1_color), playerType1));
+
+		playingManager.addPlayers(new Player(settings.getString("playerType2",
+				"Player 2"), BitmapFactory.decodeResource(getResources(),
+				R.drawable.player_symol_cross), getResources().getColor(
+				R.color.player_2_color), playerType2));
+
+		// setting the player names on playing screen
+
+		TextView player1Name = (TextView) findViewById(R.id.player_1_name);
+		player1Name.setText(settings.getString("playerType1", "Player 1"));
+
+		TextView player2Name = (TextView) findViewById(R.id.player_2_name);
+		player2Name.setText(settings.getString("playerType2", "Player 2"));
+
+		player1Score = (TextView) findViewById(R.id.player_1_score);
+		player2Score = (TextView) findViewById(R.id.player_2_score);
 
 		startGameLoop();
 	}
@@ -117,9 +132,26 @@ public class GameActivity extends Activity implements OnClickListener {
 						ImageView imageView = (ImageView) findViewById(R.id.currentPlayrIcon);
 						imageView.setImageBitmap(player.getSymbol());
 
-						TextView textView = (TextView) findViewById(R.id.displayScore);
-						textView.setText(String
-								.valueOf(investigatingScore(player)));
+						TextView currentPlayerName = (TextView) findViewById(R.id.currentplayername);
+						currentPlayerName.setText(player.getName() + "'s Turn");
+
+						//TextView textView = (TextView) findViewById(R.id.displayScore);
+						//textView.setText(String.valueOf(investigatingScore(player)));
+
+						if (player.getName().equals(
+								settings.getString("playerType1", "Player 1"))) {
+
+							player1Score.setText(String
+									.valueOf(investigatingScore(player)));
+						}
+						
+						else if (player.getName().equals(
+								settings.getString("playerType2", "Player 2"))) {
+
+							player2Score.setText(String
+									.valueOf(investigatingScore(player)));
+						}
+
 					}
 				});
 
@@ -184,16 +216,29 @@ public class GameActivity extends Activity implements OnClickListener {
 
 					public void run() {
 
-					 final	Player gewinner = investigatingWinner();
+						final Player getwinner = investigatingWinner();
 
 						/* FIXME DISPLAY TROPHY IMAGE */
 
 						int pokalBildID = 0;
-						if (gewinner.getName().equals(
-								getResources()
-										.getString(R.string.player_1_name)))
+
+						// (getwinner.getName().equals(
+						// settings.getString(
+						// "playerType1",
+						// "Player 1")))
+						if (getwinner.getName().equals(
+								settings.getString("playerType1", "Player 1"))) {
+
 							pokalBildID = R.drawable.cup_tick;
+						}
+
+						else if (getwinner.getName().equals("draw")) {
+
+							pokalBildID = R.drawable.draw;
+						}
+
 						else
+
 							pokalBildID = R.drawable.cup_cross;
 
 						AlertDialog alertDialog = new AlertDialog.Builder(
@@ -211,50 +256,83 @@ public class GameActivity extends Activity implements OnClickListener {
 										new DialogInterface.OnClickListener() {
 											public void onClick(
 													DialogInterface dialog,
-													int id) 
-											{
-							// ______________________________start Play again event_________________________________//
-												
-												if (gewinner.getName().equals(
-														getResources()
-																.getString(R.string.player_1_name)))
-												{
-													// first get the preferendes and set the value in player1Winner
-													playerPref=getSharedPreferences(filename, 0);
-													
-													Player1Winner=playerPref.getInt("player1", 0);
-													// increment the value of player1Winner and save this value in shared preferences
-													Player1Winner++;
-													
-													SharedPreferences.Editor player1Editor=playerPref.edit();
-													player1Editor.putInt("player1", Player1Winner);
-													player1Editor.commit();
-													
-													
-													
-													startActivity(getIntent());
-													
-												}
-												else {
+													int id) {
+												// ______________________________start
+												// Play again
+												// event_________________________________//
+												// settings.getString("playerType1","Player 1")
+												if (getwinner.getName().equals(
+														settings.getString(
+																"playerType1",
+																"Player 1"))) {
+													// first get the preferences
+													// and set the value in
+													// player1Winner
+													playerPref = getSharedPreferences(
+															filename1, 0);
 
-													// first get the preferences and set the value in player1Winner
-													player2Pref=getSharedPreferences(filename2, 0);
-													
-													Player2Winner=player2Pref.getInt("player2", 0);
-													// increment the value of player1Winner and save this value in shared preferences
+													Player1Winner = playerPref
+															.getInt("player1",
+																	0);
+													// increment the value of
+													// player1Winner and save
+													// this value in shared
+													// preferences
+													Player1Winner++;
+
+													SharedPreferences.Editor player1Editor = playerPref
+															.edit();
+													player1Editor.putInt(
+															"player1",
+															Player1Winner);
+													player1Editor.commit();
+
+													startActivity(getIntent());
+
+												} else if (getwinner
+														.getName()
+														.equals(settings
+																.getString(
+																		"playerType2",
+																		"Player 2"))) {
+
+													// first get the preferences
+													// and set the value in
+													// player1Winner
+													player2Pref = getSharedPreferences(
+															filename2, 0);
+
+													Player2Winner = player2Pref
+															.getInt("player2",
+																	0);
+													// increment the value of
+													// player1Winner and save
+													// this value in shared
+													// preferences
 													Player2Winner++;
-													
-													SharedPreferences.Editor player2Editor=player2Pref.edit();
-													player2Editor.putInt("player2", Player2Winner);
+
+													SharedPreferences.Editor player2Editor = player2Pref
+															.edit();
+													player2Editor.putInt(
+															"player2",
+															Player2Winner);
 													player2Editor.commit();
 													startActivity(getIntent());
-												
-												}									
-												
-											
-											
-							// ______________________________end Play again event_________________________________//
-											
+
+												}
+
+												else {
+
+													// game is draw do nothing
+
+													startActivity(getIntent());
+
+												}
+
+												// ______________________________end
+												// Play again
+												// event_________________________________//
+
 											}
 										})
 								.setNegativeButton(
@@ -265,21 +343,30 @@ public class GameActivity extends Activity implements OnClickListener {
 													DialogInterface dialog,
 													int id) {
 												dialog.dismiss();
-												Intent intent=new Intent(getApplicationContext(), MainActivity.class);
+												Intent intent = new Intent(
+														getApplicationContext(),
+														MainActivity.class);
 												startActivity(intent);
-												
-												playerPref=getSharedPreferences(filename, 0);
-												SharedPreferences.Editor player1Editor=playerPref.edit();
-												player1Editor.putInt("player1", 0);
+
+												playerPref = getSharedPreferences(
+														filename1, 0);
+												SharedPreferences.Editor player1Editor = playerPref
+														.edit();
+												player1Editor.putInt("player1",
+														0);
 												player1Editor.commit();
-												
-												player2Pref=getSharedPreferences(filename2, 0);
-												SharedPreferences.Editor player2Editor=player2Pref.edit();
-												player2Editor.putInt("player2", 0);
+
+												player2Pref = getSharedPreferences(
+														filename2, 0);
+												SharedPreferences.Editor player2Editor = player2Pref
+														.edit();
+												player2Editor.putInt("player2",
+														0);
 												player2Editor.commit();
 											}
 										}).create();
-						MediaPlayer md=MediaPlayer.create(getApplicationContext(), R.raw.notify);
+						MediaPlayer md = MediaPlayer.create(
+								getApplicationContext(), R.raw.notify);
 						md.start();
 						alertDialog.show();
 					}
@@ -397,6 +484,19 @@ public class GameActivity extends Activity implements OnClickListener {
 				winner = player;
 				maxScore = score;
 			}
+
+			// if the game is draw
+			else if (score == maxScore) {
+				PlayerType playerType1 = PlayerType.parse("Human");
+				// playingManager.addPlayers(();
+				winner = new Player("draw", BitmapFactory.decodeResource(
+						getResources(), R.drawable.player_symol_tick),
+						getResources().getColor(R.color.player_1_color),
+						playerType1);
+
+				// winner = player;
+
+			}
 		}
 
 		return winner;
@@ -414,14 +514,15 @@ public class GameActivity extends Activity implements OnClickListener {
 	}
 
 	public void onClick(View v) {
-switch (v.getId()) {
-case R.id.game_summary:
-	Intent openSummary = new Intent(getApplicationContext(), GameSummary.class);
-	startActivity(openSummary);
-	PlayerFieldView.check=true;
-	break;
-}
-		
+		switch (v.getId()) {
+		case R.id.game_summary:
+			Intent openSummary = new Intent(getApplicationContext(),
+					GameSummary.class);
+			startActivity(openSummary);
+			PlayerFieldView.check = true;
+			break;
+		}
+
 	}
 
 }

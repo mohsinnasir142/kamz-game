@@ -29,8 +29,8 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * The gameplay consists of, to put dashes boxes show to cheese to close. This
- * class is a representative of such a line. 
+ * The gameplay consists of, to put dashes boxes show to close. This class is a
+ * representative of such a line.
  */
 public class Line {
 
@@ -86,22 +86,21 @@ public class Line {
 	}
 
 	/**
-	 * If one of the box to clear at this bar only has two owners, it dannh #
-	 * tte after setting this stroke only one order'd give you a cheese boxes
-	 * show the opponent.
+	 * If one of the box to clear at this bar only has two owners, after setting
+	 * this stroke only one order'd give you a boxes show the opponent.
 	 */
 
 	// It could Surrounding In box Close(if surrounding box is closed)
-//	public boolean isSurroundingBoxClose() {
-//
-//		for (Box box : boxList)
-//			if (box.getUnselectedLinesList().size() <= 2)
-//				return true;
-//
-//		return false;
-//	}
+	// public boolean isSurroundingBoxClose() {
+	//
+	// for (Box box : boxList)
+	// if (box.getUnselectedLinesList().size() <= 2)
+	// return true;
+	//
+	// return false;
+	// }
 
-	//   get owner
+	// get owner
 	public Player getOwner() {
 		return owner;
 	}

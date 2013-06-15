@@ -19,20 +19,19 @@ import com.game.kamz.dotsandbox.R;
 
 /**
  * This class features the playing field and takes user interactions   *
- * Counter. 
+ * Counter.
  */
-public  class PlayerFieldView extends View implements OnTouchListener {
+public class PlayerFieldView extends View implements OnTouchListener {
 
 	public static int BOX_PAGE_LENGHT = 50;
 	public static int PADDING = 5;
 
 	private PlayerField PlayingField;
 
-	
-	private  volatile Line lastInput;
-	//for sound
- public	static Boolean  check=true;
- MediaPlayer mp;
+	private volatile Line lastInput;
+	// for sound
+	public static Boolean check = true;
+	MediaPlayer mp;
 
 	/**
 	 * About the last entry is brought to experience what the users. The
@@ -44,15 +43,14 @@ public  class PlayerFieldView extends View implements OnTouchListener {
 	}
 
 	public void init(PlayerField PlayingField) {
-		//for Sound
-		check=true;
+		// for Sound
+		check = true;
 		this.PlayingField = PlayingField;
 		setOnTouchListener(this);
 	}
 
-	public  Line getLastInput() {
+	public Line getLastInput() {
 
-		
 		return lastInput;
 	}
 
@@ -63,7 +61,7 @@ public  class PlayerFieldView extends View implements OnTouchListener {
 	/**
 	 * If the screen image to delete solution fully reflect the modified or
 	 * known to initial, This method is called. We use this to determine how big
-	 * a Cheese boxes show in dependency from the measurement resolutions of the
+	 * a  boxes show in dependency from the measurement resolutions of the
 	 * display must be.
 	 */
 
@@ -80,31 +78,27 @@ public  class PlayerFieldView extends View implements OnTouchListener {
 		BOX_PAGE_LENGHT = Math.min(maxWidth, maxHeight);
 	}
 
-	
 	@Override
 	protected void onDraw(Canvas canvas) {
 		canvas.drawColor(getResources().getColor(R.color.background_color));
-		//for sound
-		
-		if(check==true){
-			check=false;
+		// for sound
+
+		if (check == true) {
+			check = false;
 		}
-			
-		else if (check==false){
-		
-		
-		//action for sound onclick 
-		
-		
-		mp=MediaPlayer.create(getContext(), R.raw.popup);
-		mp.start();
-		
+
+		else if (check == false) {
+
+			// action for sound onclick
+
+			mp = MediaPlayer.create(getContext(), R.raw.popup);
+			mp.start();
+
 		}
-//		Dialog d=new Dialog(getContext());
-//		d.setTitle("::");
-//		d.show();
-		
-		
+		// Dialog d=new Dialog(getContext());
+		// d.setTitle("::");
+		// d.show();
+
 		/**
 		 * Has not yet initialized the field, not draw this. Otherwise, the'd
 		 * lead to a null pointer exception for. This is Required account also
@@ -115,8 +109,6 @@ public  class PlayerFieldView extends View implements OnTouchListener {
 			return;
 		}
 
-		
-
 		for (Box box : PlayingField.getListBox()) {
 			box.onDraw(canvas);
 		}
@@ -124,8 +116,6 @@ public  class PlayerFieldView extends View implements OnTouchListener {
 
 	public boolean onTouch(View view, MotionEvent event) {
 
-		
-		
 		/**
 		 * There are different motion events, but here we are interested only
 		 * The actual fact 1/4 on the screen.
@@ -145,14 +135,13 @@ public  class PlayerFieldView extends View implements OnTouchListener {
 
 		Box box = PlayingField.getBox(calculatedgridX, calculatedgridY);
 		/*
-		 * If any of the celebrity hardships position is no cheese or boxes show
+		 * If any of the celebrity hardships position is no boxes show
 		 * This already has an owner, ignore the entry.
 		 */
 		if (box == null || box.getOwner() != null)
 			return true;
 
-		Line line = box.determineLine((int) event.getX(),
-				(int) event.getY());
+		Line line = box.determineLine((int) event.getX(), (int) event.getY());
 
 		/*
 		 * Was no bar to be determined, the user has probably The center of the
@@ -185,7 +174,7 @@ public  class PlayerFieldView extends View implements OnTouchListener {
 	}
 
 	public void updateDisplay() {
-		
+
 		postInvalidate(); // View force to redraw
 	}
 
