@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-     xmlns:ads="http://schemas.android.com/apk/lib/com.google.ads"
+    xmlns:ads="http://schemas.android.com/apk/lib/com.google.ads"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:layout_centerHorizontal="true"
@@ -8,14 +8,14 @@
     android:background="@drawable/myrectangle"
     android:orientation="vertical" >
 
-<com.google.ads.AdView
-            android:id="@+id/adViews"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            ads:adSize="BANNER"
-            ads:adUnitId="a1518c693497acc"
-            ads:loadAdsOnCreate="true" />
-    
+    <com.google.ads.AdView
+        android:id="@+id/adViews"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        ads:adSize="BANNER"
+        ads:adUnitId="a1518c693497acc"
+        ads:loadAdsOnCreate="true" />
+
     <TableLayout
         android:id="@+id/tableLayout1"
         android:layout_width="fill_parent"
@@ -28,7 +28,7 @@
             android:layout_height="wrap_content" >
 
             <TextView
-                android:id="@+id/playername"
+                android:id="@+id/currentplayername"
                 style="@style/PlayerNames"
                 android:layout_gravity="center_vertical"
                 android:text="@string/player" />
@@ -38,11 +38,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/player_symol_tick" />
-
+            <!--
             <TextView
                 android:id="@+id/displayScore"
                 style="@style/PlayerNames"
                 android:layout_gravity="center_horizontal" />
+            -->
 
             <Button
                 android:id="@+id/game_summary"
@@ -53,9 +54,80 @@
         </TableRow>
     </TableLayout>
 
+    <!-- score board start -->
+
+    <TableLayout
+        android:id="@+id/tableLayout1"
+        android:layout_width="fill_parent"
+        android:layout_height="30dp"
+        android:orientation="horizontal"
+        android:stretchColumns="1" >
+
+        <TableLayout
+            android:id="@+id/tabla_cuerpo"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+
+            <TableRow
+                android:id="@+id/tableRow2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center" >
+
+                <TextView
+                    android:id="@+id/player_1_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="1dp"
+                    android:background="@drawable/myrectangle"
+                    android:text="Won"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textColor="#000" >
+                </TextView>
+
+                <TextView
+                    android:id="@+id/player_1_score"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/cell_shape"
+                    android:gravity="center"
+                    android:padding="5dp"
+                    android:text="0"
+                    android:textAppearance="?android:attr/textAppearanceMedium" >
+                </TextView>
+                //settings.getString("playerType1", "Player 1")
+
+                <TextView
+                    android:id="@+id/player_2_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="1dp"
+                    android:background="@drawable/myrectangle"
+                    android:text="Won"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textColor="#000" >
+                </TextView>
+
+                <TextView
+                    android:id="@+id/player_2_score"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/cell_shape"
+                    android:gravity="center"
+                    android:padding="5dp"
+                    android:text="0"
+                    android:textAppearance="?android:attr/textAppearanceMedium" >
+                </TextView>
+            </TableRow>
+        </TableLayout>
+
+        <!-- score board end -->
+
+    </TableLayout>
+
     <com.game.kamz.dotsandbox.PlayerFieldView
         android:id="@+id/playerfieldview"
         android:layout_width="wrap_content"
         android:layout_height="fill_parent" />
-    
+
 </LinearLayout>

@@ -18,12 +18,12 @@ public class PlayerField {
 	private Box[][] boxArray;
 
 	/**
-	 * A second list is  vascular diseases deriving from performance-Green
-	 * leads to the 'Box List' not so   must be frequently iterates
-	 * through-. For this leads to poor performance in large fields.
+	 * A second list is vascular diseases deriving from performance-Green leads
+	 * to the 'Box List' not so must be frequently iterates through-. For this
+	 * leads to poor performance in large fields.
 	 */
 	private List<Box> openBoxesList = new ArrayList<Box>();
-	//   strokes without owner
+	// strokes without owner
 	private Set<Line> strokesWithoutOwners = new HashSet<Line>();
 
 	/**
@@ -41,18 +41,18 @@ public class PlayerField {
 
 		List<Box> list = new ArrayList<Box>();
 
-		for (int rasterX = 0; rasterX < boxInWidth; rasterX++) {
-			for (int rasterY = 0; rasterY < boxInHeight; rasterY++) {
-				list.add(boxArray[rasterX][rasterY]);
+		for (int gridX = 0; gridX < boxInWidth; gridX++) {
+			for (int gridY = 0; gridY < boxInHeight; gridY++) {
+				list.add(boxArray[gridX][gridY]);
 			}
 		}
 
 		return Collections.unmodifiableList(list);
 	}
 
-//	public List<Box> getOpenBoxList() {
-//		return Collections.unmodifiableList(openBoxesList);
-//	}
+	// public List<Box> getOpenBoxList() {
+	// return Collections.unmodifiableList(openBoxesList);
+	// }
 
 	public Set<Line> getStrokesWithoutOwners() {
 		return Collections.unmodifiableSet(strokesWithoutOwners);
@@ -84,14 +84,13 @@ public class PlayerField {
 	}
 
 	/**
-	 * Closes all box to clear it, the   can be closed.    @ param
-	 Boxes show the owner of this cheese to be
-	 * assigned    Could @ return a box to clear it be closed? (Important for
-	 * gameplay)
+	 * Closes all box to clear it, the can be closed.    @ param Boxes show the
+	 * owner of this cheese to be assigned    Could @ return a box to clear it
+	 * be closed? (Important for gameplay)
 	 * 
 	 */
 
-	//   assign and owner
+	// assign and owner
 	private boolean concludeAllPossibleBox(Player assignAndOwner) {
 		// Closed box Could Become
 		boolean isBoxClosed = false;
@@ -136,8 +135,8 @@ public class PlayerField {
 			}
 		}
 
-		for (int gridX = 0; gridX < numberH; gridX++) {
-			for (int gridY = 0; gridY < numberV; gridY++) {
+		for (int gridX = 0; gridX < numberH ; gridX++) {
+			for (int gridY = 0; gridY < numberV ; gridY++) {
 
 				Box box = playingField.getBox(gridX, gridY);
 

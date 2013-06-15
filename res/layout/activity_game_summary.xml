@@ -58,7 +58,9 @@
             
             
             <TextView
-                android:id="@+id/textView1"
+                android:id="@+id/player_1_name"
+                android:minWidth="60dip"
+                android:gravity="center"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="1dp"
@@ -68,7 +70,9 @@
                 android:textColor="#000" />
 
             <TextView
-                android:id="@+id/textView1"
+                android:id="@+id/player_2_name"
+                android:minWidth="60dip"
+                android:gravity="center"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="1dp"
