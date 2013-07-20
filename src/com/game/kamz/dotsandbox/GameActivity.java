@@ -135,8 +135,9 @@ public class GameActivity extends Activity implements OnClickListener {
 						TextView currentPlayerName = (TextView) findViewById(R.id.currentplayername);
 						currentPlayerName.setText(player.getName() + "'s Turn");
 
-						//TextView textView = (TextView) findViewById(R.id.displayScore);
-						//textView.setText(String.valueOf(investigatingScore(player)));
+						// TextView textView = (TextView)
+						// findViewById(R.id.displayScore);
+						// textView.setText(String.valueOf(investigatingScore(player)));
 
 						if (player.getName().equals(
 								settings.getString("playerType1", "Player 1"))) {
@@ -144,7 +145,7 @@ public class GameActivity extends Activity implements OnClickListener {
 							player1Score.setText(String
 									.valueOf(investigatingScore(player)));
 						}
-						
+
 						else if (player.getName().equals(
 								settings.getString("playerType2", "Player 2"))) {
 
@@ -175,7 +176,7 @@ public class GameActivity extends Activity implements OnClickListener {
 						} catch (InterruptedException ignore) {
 							/*
 							 * This case can be ignored. If the thread pl wake
-							 * up again , it is provided that no input is Geta ¤
+							 * up again , it is provided that no input is Geta
 							 * account directly put to sleep again surrounded by
 							 * the while loop.
 							 */
@@ -378,12 +379,12 @@ public class GameActivity extends Activity implements OnClickListener {
 
 	private String getGameOverDialogMessage() {
 
-		Player gewinner = investigatingWinner();
+		Player getwinner = investigatingWinner();
 
 		StringBuilder sb = new StringBuilder();
 
 		sb.append(getResources().getString(R.string.winner) + ": "
-				+ gewinner.getName() + "\n\n");
+				+ getwinner.getName() + "\n\n");
 
 		for (Player player : playingManager.getPlayer())
 			sb.append(player.getName() + ":\t\t" + investigatingScore(player)
@@ -403,8 +404,8 @@ public class GameActivity extends Activity implements OnClickListener {
 	//
 	// /*
 	// * The easy AI just any line, the average AI fits at least, that is no
-	// * bar weight, the Complete boxes show a cheese train at the opponent k
-	// * Ã and this might thus gives a point.
+	// * bar weight, the Complete boxes show a train at the opponent k
+	// *and this might thus gives a point.
 	// */
 	// if (playertype == PlayerType.COMPUTER_MEDIUM) {
 	//

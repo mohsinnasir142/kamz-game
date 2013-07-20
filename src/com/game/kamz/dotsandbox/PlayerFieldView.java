@@ -61,7 +61,7 @@ public class PlayerFieldView extends View implements OnTouchListener {
 	/**
 	 * If the screen image to delete solution fully reflect the modified or
 	 * known to initial, This method is called. We use this to determine how big
-	 * a  boxes show in dependency from the measurement resolutions of the
+	 * a boxes show in dependency from the measurement resolutions of the
 	 * display must be.
 	 */
 
@@ -135,8 +135,8 @@ public class PlayerFieldView extends View implements OnTouchListener {
 
 		Box box = PlayingField.getBox(calculatedgridX, calculatedgridY);
 		/*
-		 * If any of the celebrity hardships position is no boxes show
-		 * This already has an owner, ignore the entry.
+		 * If any of the celebrity hardships position is no boxes show This
+		 * already has an owner, ignore the entry.
 		 */
 		if (box == null || box.getOwner() != null)
 			return true;
@@ -145,19 +145,13 @@ public class PlayerFieldView extends View implements OnTouchListener {
 
 		/*
 		 * Was no bar to be determined, the user has probably The center of the
-		 * cheese stchens taken. Anyway, it is not clear           What line he
-		 * meant. Therefore, the command is aborted.
+		 * cheese taken. Anyway, it is not clear What line he meant. Therefore,
+		 * the command is aborted.
 		 */
 		if (line == null)
 			return true;
 
-		/*
-		 * At this point the user has entered his successful get a ¤ account. We
-		 * write its input into an intermediate variable for the Communication
-		 * is used with the thread and wake Gameloop This again via "notifyAll".
-		 * The Gameloop thread was previously With "wait ()" and this class as a
-		 * semaphore "paused".
-		 */
+
 		lastInput = line;
 		/*
 		 * At this point the user has input his account successfully get. We
