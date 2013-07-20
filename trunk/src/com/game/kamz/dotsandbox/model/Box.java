@@ -42,8 +42,8 @@ import android.graphics.Rect;
 public class Box {
 
 	/**
-	 * Position of the cheese stand in the grid. This is about 
-	 * identified,   so this is the ID.
+	 * Position of the cheese stand in the grid. This is about identified, so
+	 * this is the ID.
 	 */
 	private int gridX;
 	private int gridY;
@@ -54,7 +54,7 @@ public class Box {
 	 */
 	private Player owner;
 
-	/* Bars of tick picking*/
+	/* Bars of tick picking */
 	private Line topLine;
 	private Line bottomLine;
 	private Line leftLine;
@@ -147,7 +147,7 @@ public class Box {
 	}
 
 	public List<Line> getUnselectedLinesList() {
-
+		// FIXME ommitt topline!=null condition
 		List<Line> lineList = new ArrayList<Line>();
 		if (topLine != null && topLine.getOwner() == null)
 			lineList.add(topLine);
@@ -169,7 +169,7 @@ public class Box {
 		if (topLine == null)
 			return null;
 
-		return new Rect(getPixelX() + PlayerFieldView.BOX_PAGE_LENGHT/ 4,
+		return new Rect(getPixelX() + PlayerFieldView.BOX_PAGE_LENGHT / 4,
 				getPixelY() - PlayerFieldView.BOX_PAGE_LENGHT / 4, getPixelX()
 						+ (int) (PlayerFieldView.BOX_PAGE_LENGHT * 0.75),
 				getPixelY() + PlayerFieldView.BOX_PAGE_LENGHT / 4);
@@ -212,11 +212,11 @@ public class Box {
 	}
 
 	/**
-	 * This method determines which line of to be chosen in sequence
+	 * This method determines which line to be chosen in sequence
 	 */
 	public Line determineLine(int pixelX, int pixelY) {
 
-		if (getRectTopLine() != null 
+		if (getRectTopLine() != null
 				&& getRectTopLine().contains(pixelX, pixelY))
 			return topLine;
 
@@ -247,11 +247,11 @@ public class Box {
 					+ PlayerFieldView.BOX_PAGE_LENGHT);
 			canvas.drawBitmap(owner.getSymbol(), null, destRect, framePaint);
 		}
-
+		// FIXME borders are being draw here
 		if (topLine == null) {
 			framePaint.setColor(Color.BLACK);
-			canvas.drawLine(getPixelX(), getPixelY(), getPixelX()
-					+ PlayerFieldView.BOX_PAGE_LENGHT, getPixelY(), framePaint);
+			 canvas.drawLine(getPixelX(), getPixelY(), getPixelX()
+			 + PlayerFieldView.BOX_PAGE_LENGHT, getPixelY(), framePaint);
 		}
 
 		if (bottomLine != null && bottomLine.getOwner() != null)
@@ -260,12 +260,14 @@ public class Box {
 			framePaint.setColor(Color.LTGRAY);
 		else
 			framePaint.setColor(Color.BLACK);
+		
+		
 
 		canvas.drawLine(getPixelX(), getPixelY()
 				+ PlayerFieldView.BOX_PAGE_LENGHT, getPixelX()
 				+ PlayerFieldView.BOX_PAGE_LENGHT, getPixelY()
 				+ PlayerFieldView.BOX_PAGE_LENGHT, framePaint);
-
+		
 		if (leftLine == null) {
 			framePaint.setColor(Color.BLACK);
 			canvas.drawLine(getPixelX(), getPixelY(), getPixelX(), getPixelY()
@@ -301,8 +303,8 @@ public class Box {
 
 	@Override
 	public String toString() {
-		return "Kaestchen [grid X=" + gridX + ", grid Y=" + gridY
-				+ ", Owner=" + owner + "]";
+		return "Kaestchen [grid X=" + gridX + ", grid Y=" + gridY + ", Owner="
+				+ owner + "]";
 	}
 
 	@Override
