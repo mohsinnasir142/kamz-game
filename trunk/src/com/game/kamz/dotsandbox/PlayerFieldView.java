@@ -105,11 +105,13 @@ public class PlayerFieldView extends View implements OnTouchListener {
 		 * to be represented correctly in the GUI editor.          
 		 */
 		if (PlayingField == null) {
+			
 			canvas.drawRect(0, 0, getWidth(), getHeight(), new Paint());
 			return;
 		}
 
 		for (Box box : PlayingField.getListBox()) {
+			
 			box.onDraw(canvas);
 		}
 	}
