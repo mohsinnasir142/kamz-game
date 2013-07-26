@@ -124,45 +124,86 @@ public class PlayerField {
 	/**
 	 * Factory method for creating a playing field
 	 */
-	public static PlayerField generate(int numberH, int numberV) {
 
-		PlayerField playingField = new PlayerField(numberH, numberV);
+	// TODO all the magic is being done here
+
+	public static PlayerField generate(int numberH, int numberW) {
+
+		PlayerField playingField = new PlayerField(numberH, numberW);
 
 		for (int gridX = 0; gridX < numberH; gridX++) {
-			for (int gridY = 0; gridY < numberV; gridY++) {
+			for (int gridY = 0; gridY < numberW; gridY++) {
 
-				playingField.addBox(new Box(gridX, gridY));
+
+					playingField.addBox(new Box(gridX, gridY));
+
 			}
 		}
+		/*
+		 * RUNNING LIKE
+		 * *******************************************************************
+		 * 00 01 02 . . . . . 0w /////////////////////////////////////////////
+		 * 10 11 12 . . . . . 1w /////////////////////////////////////////////
+		 * 20 21 22 . . . . . 2w /////////////////////////////////////////////
+		 * .. .. .. . . . . . .. /////////////////////////////////////////////
+		 * .. .. . . . . . .. .. /////////////////////////////////////////////
+		 * h0 .. .. . . . . . hw /////////////////////////////////////////////
+		 * *******************************************************************
+		 */
+		for (int gridY = 0; gridY < numberH; gridY++) {
+			for (int gridX = 0; gridX < numberW; gridX++) {
 
-		for (int gridX = 0; gridX < numberH ; gridX++) {
-			for (int gridY = 0; gridY < numberV ; gridY++) {
-
-				Box box = playingField.getBox(gridX, gridY);
+				Box topBox = playingField.getBox(gridY, gridX);
 
 				Box bottomBox = null;
 				Box rightBox = null;
+				Box leftBox = null;
 
-				if (gridY < numberV - 1)
-					bottomBox = playingField.getBox(gridX, gridY + 1);
+				// it means if width is 3 then grid is 0-2 and will run one less
+				// than numberH
+				if (gridX < numberW - 1)
+					// getbox(width,height)
+					bottomBox = playingField.getBox(gridY, gridX + 1);
 
-				if (gridX < numberH - 1)
-					rightBox = playingField.getBox(gridX + 1, gridY);
+				if (gridY < numberH - 1)
+					rightBox = playingField.getBox(gridY + 1, gridX);
 
-				Line belowLine = new Line(box, bottomBox, null, null);
-				Line rightLine = new Line(null, null, box, rightBox);
+				if (gridY > 0)
+					leftBox = playingField.getBox(gridY - 1, gridX);
+				// FIXME
+
+				Line belowLine = new Line(topBox, bottomBox, null, rightBox);
+				Line rightLine = new Line(null, null, topBox, rightBox);
+				Line leftLine = new Line(null, null, null, rightBox);
 
 				if (rightBox != null) {
-					box.setRightLine(rightLine);
+					topBox.setRightLine(rightLine);
 					rightBox.setLeftLine(rightLine);
+					
+					
 					playingField.addLine(rightLine);
 				}
 
 				if (bottomBox != null) {
-					box.setBottomLine(belowLine);
+					topBox.setBottomLine(belowLine);
 					bottomBox.setTopLine(belowLine);
 					playingField.addLine(belowLine);
 				}
+
+				// TEST1
+				// if (leftBox != null) {
+				// //topBox.setLeftLine(leftLine);
+				// leftBox.setTopLine(leftLine);
+				// //playingField.addLine(leftLine);
+				// }
+
+				// TEST1 left line will be reemoved
+
+				// if (topBox != null) {
+				// topBox.setRightLine(leftLine);
+				// rightBox.setLeftLine(leftLine);
+				// playingField.addLine(leftLine);
+				// }
 			}
 		}
 

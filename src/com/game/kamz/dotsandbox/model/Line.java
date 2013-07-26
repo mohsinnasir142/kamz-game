@@ -28,6 +28,10 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import com.game.kamz.dotsandbox.GameActivity;
+
+import android.widget.Toast;
+
 /**
  * The gameplay consists of, to put dashes boxes show to close. This class is a
  * representative of such a line.
@@ -121,11 +125,10 @@ public class Line {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((leftBox == null) ? 0 : leftBox.hashCode());
+		
 		result = prime * result + ((topBox == null) ? 0 : topBox.hashCode());
-		result = prime * result
-				+ ((rightBox == null) ? 0 : rightBox.hashCode());
-		result = prime * result
-				+ ((bottomBox == null) ? 0 : bottomBox.hashCode());
+		result = prime * result	+ ((rightBox == null) ? 0 : rightBox.hashCode());
+		result = prime * result	+ ((bottomBox == null) ? 0 : bottomBox.hashCode());
 		return result;
 	}
 

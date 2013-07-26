@@ -249,7 +249,7 @@ public class Box {
 		}
 		// FIXME borders are being draw here
 		if (topLine == null) {
-			framePaint.setColor(Color.BLACK);
+			framePaint.setColor(Color.YELLOW);
 			 canvas.drawLine(getPixelX(), getPixelY(), getPixelX()
 			 + PlayerFieldView.BOX_PAGE_LENGHT, getPixelY(), framePaint);
 		}
@@ -259,7 +259,7 @@ public class Box {
 		else if (bottomLine != null)
 			framePaint.setColor(Color.LTGRAY);
 		else
-			framePaint.setColor(Color.BLACK);
+			framePaint.setColor(Color.YELLOW);
 		
 		
 
@@ -269,7 +269,7 @@ public class Box {
 				+ PlayerFieldView.BOX_PAGE_LENGHT, framePaint);
 		
 		if (leftLine == null) {
-			framePaint.setColor(Color.BLACK);
+			framePaint.setColor(Color.YELLOW);
 			canvas.drawLine(getPixelX(), getPixelY(), getPixelX(), getPixelY()
 					+ PlayerFieldView.BOX_PAGE_LENGHT, framePaint);
 		}
@@ -279,14 +279,14 @@ public class Box {
 		else if (rightLine != null)
 			framePaint.setColor(Color.LTGRAY);
 		else
-			framePaint.setColor(Color.BLACK);
+			framePaint.setColor(Color.YELLOW);
 
 		canvas.drawLine(getPixelX() + PlayerFieldView.BOX_PAGE_LENGHT,
 				getPixelY(), getPixelX() + PlayerFieldView.BOX_PAGE_LENGHT,
 				getPixelY() + PlayerFieldView.BOX_PAGE_LENGHT, framePaint);
 
 		/* vertices draw */
-		framePaint.setColor(Color.BLACK);
+		framePaint.setColor(Color.YELLOW);
 		canvas.drawRect(getPixelX() - 1, getPixelY() - 1, getPixelX() + 1,
 				getPixelY() + 1, framePaint);
 		canvas.drawRect(getPixelX() + PlayerFieldView.BOX_PAGE_LENGHT - 1,
@@ -303,7 +303,7 @@ public class Box {
 
 	@Override
 	public String toString() {
-		return "Kaestchen [grid X=" + gridX + ", grid Y=" + gridY + ", Owner="
+		return "Box [grid X=" + gridX + ", grid Y=" + gridY + ", Owner="
 				+ owner + "]";
 	}
 
